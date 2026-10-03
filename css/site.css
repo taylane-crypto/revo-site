@@ -153,7 +153,21 @@ html.ui .svc.is-open .svc__h { visibility: hidden; opacity: 0; }
 
 /* ---------- 06 · Logos ---------- */
 .logos { padding: 0 0 var(--site-section-y); }
-.logos .rv-logos__item { font-size: var(--rv-fs-body-lg); color: var(--rv-text-secondary); }
+.logos { --logo-s: 1; }
+.logos .rv-logos__row { align-items: center; gap: var(--rv-space-6) clamp(36px, 5vw, 64px); }
+.logos .rv-logos__item { display: flex; align-items: center; padding: var(--rv-space-2) 0; opacity: 1; }
+/* Mesma altura óptica: cada logo tem a sua altura, ajustada a olho (o bloco sólido da Suhai pesa mais, o traço fino da Stay pesa menos). */
+.logos__img { display: block; width: auto; max-width: none; height: calc(var(--logo-h, 32px) * var(--logo-s)); filter: grayscale(1); opacity: var(--logo-o, .62); transition: filter var(--rv-dur-2) var(--rv-ease-out), opacity var(--rv-dur-2) var(--rv-ease-out); }
+.logos [data-cliente="mapfre"] { --logo-h: 44px; }
+.logos [data-cliente="suhai"] { --logo-h: 34px; }
+.logos [data-cliente="baeta"] { --logo-h: 27px; --logo-o: .85; }
+.logos [data-cliente="stay"] { --logo-h: 28px; --logo-o: .5; }
+.logos .rv-logos__item:hover .logos__img { filter: none; opacity: 1; }
+@media (max-width: 600px) {
+  .logos { --logo-s: .82; }
+  .logos .rv-logos__row { display: grid; grid-template-columns: repeat(2, auto); justify-content: center; justify-items: center; gap: var(--rv-space-6) clamp(40px, 14vw, 64px); }
+}
+@media (prefers-reduced-motion: reduce) { .logos__img { transition: none; } }
 
 /* ---------- 07 · Perguntas ---------- */
 .faq { padding: 0 0 var(--site-section-y); scroll-margin-top: 96px; }
