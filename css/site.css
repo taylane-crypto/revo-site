@@ -61,6 +61,12 @@ body.rv { overflow-x: hidden; overflow-x: clip; font-size: var(--rv-fs-body-lg);
 
 .hall__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; max-width: calc(var(--site-max) + 2 * var(--site-gutter)); margin: 0 auto; padding: 0 var(--site-gutter); }
 .hall__title { font-size: clamp(40px, 5.3vw, 84px); text-wrap: balance; }
+/* H1 dinâmico: "Criamos" numa linha e o termo na outra. Estático (sem JS e com movimento reduzido): só o primeiro termo, completo. */
+.hero-type, .hero-type__lead, .hero-type__slot { display: block; }
+.hero-type__slot[data-tone="pine"] { color: var(--pine-700); }
+.hero-type__slot[data-tone="violet"] { color: var(--violet-700); }
+.hero-type__slot[data-tone="rose"] { color: var(--rose-700); }
+.hero-type__caret { display: none; }
 
 .flow { margin-top: clamp(36px, 5vw, 64px); padding: 0 clamp(8px, 1.2vw, 16px); }
 .flow__panel { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--rv-radius-2xl); padding: 56px clamp(12px, 2.4vw, 32px) clamp(12px, 2.4vw, 32px); }

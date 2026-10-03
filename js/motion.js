@@ -11,6 +11,7 @@
    4. Parede Suhai: duplica o conteúdo para o laço em CSS. Processo: as
       etapas acendem em sequência.
    5. Entradas simples por IntersectionObserver.
+   6. H1 dinâmico: digita, segura, apaga e troca os termos (bloco do hero).
    Sem bibliotecas, sem canvas, sem setInterval.
    ========================================================================== */
 (function () {
@@ -65,11 +66,74 @@
     st.setProperty("--e", e.toFixed(4));
     st.setProperty("--px", px.toFixed(3));
     st.setProperty("--py", py.toFixed(3));
-    hall.classList.toggle("is-deep", e > 0.3);
+    var deep = e > 0.3;
+    if (deep !== wasDeep) { wasDeep = deep; hall.classList.toggle("is-deep", deep); typer.sync(); }
     if (settled) { running = false; return; }
     requestAnimationFrame(frame);
   }
   function kick() { if (!running) { running = true; requestAnimationFrame(frame); } }
+
+  /* H1 dinâmico: um único laço de setTimeout encadeado (nunca mais de um timer vivo).
+     Escreve, segura para leitura, apaga mais rápido e passa ao próximo termo. Para quando o hero
+     sai da tela, quando o painel abre (o texto some) ou com a aba oculta; retoma de onde parou. */
+  var wasDeep = false;
+  var typer = (function () {
+    var box = hall && $("[data-type]", hall);
+    var none = { sync: function () {}, start: function () {}, place: function () {} };
+    if (!box) return none;
+    var txt = $("[data-type-text]", box), slot = $("[data-type-slot]", box), caret = $("[data-type-caret]", box);
+    var terms = (box.getAttribute("data-type-terms") || "").split("|").filter(Boolean).map(function (t) { return Array.from(t); });
+    if (!txt || !slot || !caret || terms.length < 2) return none;
+    var TONES = ["pine", "violet", "rose"];
+    var i = 0, n = terms[0].length, phase = "hold", timer = 0, started = false;
+    // Cópias invisíveis de cada termo na mesma célula do slot: reservam a área do mais longo.
+    terms.forEach(function (t) {
+      var s = document.createElement("span");
+      s.className = "hero-type__size"; s.textContent = t.join("");
+      slot.appendChild(s);
+    });
+    var rnd = function (a, b) { return a + Math.random() * (b - a); };
+    // O cursor anda por transform até o fim do texto: uma leitura de largura por letra, sem mexer em layout.
+    var place = function () { caret.style.setProperty("--cx", txt.getBoundingClientRect().width.toFixed(2) + "px"); };
+    var paint = function () { txt.textContent = terms[i].slice(0, n).join(""); place(); };
+    var active = function () {
+      return started && visible && !wasDeep && !document.hidden && root.classList.contains("motion-ok");
+    };
+    var later = function (ms) { clearTimeout(timer); timer = setTimeout(tick, ms); };
+    var stop = function () { clearTimeout(timer); timer = 0; box.classList.remove("is-busy"); };
+    function tick() {
+      timer = 0;
+      if (!active()) {
+        if (!root.classList.contains("motion-ok")) { n = terms[i].length; paint(); }
+        stop(); return;
+      }
+      var t = terms[i];
+      if (phase === "type") {
+        n += 1; paint();
+        if (n >= t.length) { phase = "hold"; box.classList.remove("is-busy"); later(rnd(1650, 1950)); }
+        else later(rnd(45, 70) + (t[n - 1] === " " ? 24 : 0));
+      } else if (phase === "hold" || phase === "erase") {
+        phase = "erase"; box.classList.add("is-busy");
+        n -= 1; paint();
+        if (n <= 0) { phase = "gap"; box.classList.remove("is-busy"); later(rnd(260, 340)); }
+        else later(rnd(25, 35));
+      } else {
+        i = (i + 1) % terms.length; n = 0;
+        slot.setAttribute("data-tone", TONES[i % TONES.length]);
+        phase = "type"; box.classList.add("is-busy");
+        later(rnd(45, 70));
+      }
+    }
+    return {
+      // O primeiro termo já entra completo com o título; o laço começa depois da entrada e de uma pausa de leitura.
+      start: function (delay) { started = true; place(); if (active()) later(delay); },
+      place: place,
+      sync: function () {
+        if (!active()) { stop(); return; }
+        if (!timer) later(phase === "hold" ? 1200 : 240);
+      }
+    };
+  })();
 
   if (hall && stage && deck) {
     $$("[data-flow-col]", deck).forEach(function (col) {
@@ -81,9 +145,13 @@
     hall.classList.add("is-built");
     readScroll(); p = tp;
     kick();
+    // Título entra em 70 + 700 ms (motion.css, cascata do .hall__copy); depois, leitura do primeiro termo.
+    typer.start(770 + 1800);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(typer.place);
+    document.addEventListener("visibilitychange", typer.sync);
 
     window.addEventListener("scroll", function () { if (visible) { readScroll(); kick(); } }, { passive: true });
-    window.addEventListener("resize", function () { readScroll(); kick(); });
+    window.addEventListener("resize", function () { readScroll(); kick(); typer.place(); });
 
     // Ponteiro dá parallax leve ao plano das peças, só com hover fino.
     if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
@@ -101,6 +169,7 @@
         hall.classList.toggle("is-out", !visible);
         if (visible) readScroll();
         kick();
+        typer.sync();
       }).observe(hall);
     }
 

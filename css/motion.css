@@ -31,7 +31,27 @@ html.motion-ok .hall.is-built .hall__copy {
   opacity: clamp(0, calc(1 - var(--e) * 2.6), 1);
 }
 html.motion-ok .hall.is-built.is-deep .hall__copy { pointer-events: none; }
-html.motion-ok .hall.is-built .hall__title { font-size: clamp(40px, 5.3vw, 80px); }
+/* O termo mais longo ("design sob demanda", cerca de 8,6em) cabe numa linha da coluna de texto: 8.9em de folga. */
+html.motion-ok .hall.is-built .hall__title { font-size: min(clamp(40px, 5.3vw, 80px), calc(min(41vw, 560px) / 8.9)); }
+
+/* H1 dinâmico. O slot empilha a palavra visível e uma cópia invisível de cada termo na mesma célula:
+   a área do título já nasce do tamanho do termo mais longo e não muda durante o ciclo. */
+html.motion-ok .hall.is-built .hero-type__slot { display: grid; justify-items: start; white-space: nowrap; }
+html.motion-ok .hall.is-built .hero-type__slot > * { grid-area: 1 / 1; }
+html.motion-ok .hall.is-built .hero-type__size { visibility: hidden; }
+/* Cursor fino na cor do termo. É item da mesma célula, preso ao início do slot; o motion.js o leva ao fim
+   do texto só com transform (nada de layout, nenhum layout shift). A barra é o ::after. */
+html.motion-ok .hall.is-built .hero-type__caret { display: block; position: relative; justify-self: start; width: 0; transform: translate3d(var(--cx, 0px), 0, 0); }
+html.motion-ok .hall.is-built .hero-type__caret::after {
+  content: ""; position: absolute; left: .05em; top: .1em;
+  width: max(2px, .04em); height: .86em; border-radius: 1px;
+  background: currentColor;
+  animation: hero-caret 1060ms var(--rv-ease-out) infinite;
+}
+html.motion-ok .hall.is-built .hero-type.is-busy .hero-type__caret::after { animation: none; }
+html.motion-ok .hall.is-out .hero-type__caret::after,
+html.motion-ok .hall.is-deep .hero-type__caret::after { animation-play-state: paused; }
+@keyframes hero-caret { 0%, 46% { opacity: 1; } 54%, 100% { opacity: 0; } }
 
 html.motion-ok .hall.is-built .flow { position: absolute; inset: 0; margin: 0; padding: 0; z-index: 1; animation: site-slide 900ms var(--rv-ease-out) both; }
 html.motion-ok .hall.is-built .flow__panel {
@@ -106,6 +126,7 @@ html.motion-ok .hall.is-built .hall__copy > *:nth-child(4) { animation-delay: 21
     left: var(--site-gutter); right: var(--site-gutter); width: auto; gap: 16px;
     transform: translate3d(0, calc(var(--e) * -48px), 0);
   }
+  html.motion-ok .hall.is-built .hall__title { font-size: min(clamp(40px, 5.3vw, 80px), calc((100vw - 2 * var(--site-gutter)) / 8.9)); }
   html.motion-ok .hall.is-built .flow__panel {
     inset: 8px;
     transform-origin: 50% 0;
@@ -130,7 +151,8 @@ html.motion-ok .wall.is-live { height: clamp(520px, 80vh, 780px); padding: 0; }
 html.motion-ok .wall.is-live .wall__plane {
   position: absolute; left: 6%; right: 6%; top: 0;
   transform: perspective(1500px) rotateX(14deg) rotateZ(-6deg) scale(1.16);
-  transform-origin: 50% 30%;
+  /* Origem em 25%: com as artes 03 e 04 o plano ficou cerca de 20% mais alto; 25% mantém o pivô onde os 30% caíam antes e o vão do canto não cresce. */
+  transform-origin: 50% 25%;
 }
 html.motion-ok .wall.is-live .piece[data-repeat] { display: block; }
 html.motion-ok .wall.is-live .wall__col { animation: wall-rise 52s linear infinite; will-change: transform; }
