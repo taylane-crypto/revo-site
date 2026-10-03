@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Revo Studio · motion.css (v3b)
+   Tudo aqui só vale com html.motion-ok (JS ativo e sem prefers-reduced-motion).
+   Hero "fluxo de trabalhos": painel de fundo de marca com colunas de peças
+   correndo em sentidos opostos; o scroll abre o painel até a tela inteira e
+   desfaz a inclinação (mosaico). Declaração por palavra, parede Suhai, faixa.
+   Regras: só transform, translate e opacity; entradas ease-out; UI 150 a 400 ms.
+   ========================================================================== */
+
+html.motion-ok .hall:not(.is-built) .flow { visibility: hidden; }
+
+/* ---------- Hero ---------- */
+html.motion-ok .hall.is-built { height: 280vh; }
+
+html.motion-ok .hall.is-built .hall__stage {
+  --p: 0;   /* progresso do scroll, 0 a 1 (motion.js, em requestAnimationFrame) */
+  --e: 0;   /* o mesmo progresso com easing: abertura do painel */
+  --px: 0; --py: 0; /* ponteiro, -1 a 1 */
+  --col: calc((100vw - 68px - 4 * var(--flow-gap)) / 5);
+  position: sticky; top: 0;
+  height: 100vh; padding: 0;
+  overflow: hidden;
+  overflow: clip;
+}
+
+html.motion-ok .hall.is-built .hall__copy {
+  position: absolute; z-index: 2; top: 50%;
+  left: max(var(--site-gutter), calc((100vw - var(--site-max)) / 2));
+  width: min(41vw, 560px); max-width: none; margin: 0; padding: 0;
+  transform: translate3d(calc(var(--e) * -72px), -46%, 0);
+  opacity: clamp(0, calc(1 - var(--e) * 2.6), 1);
+}
+html.motion-ok .hall.is-built.is-deep .hall__copy { pointer-events: none; }
+html.motion-ok .hall.is-built .hall__title { font-size: clamp(40px, 5.3vw, 80px); }
+
+html.motion-ok .hall.is-built .flow { position: absolute; inset: 0; margin: 0; padding: 0; z-index: 1; animation: site-slide 900ms var(--rv-ease-out) both; }
+html.motion-ok .hall.is-built .flow__panel {
+  position: absolute; inset: 10px; padding: 0;
+  perspective: 1700px;
+  transform-origin: 0 50%;
+  transform: translate3d(calc((1 - var(--e)) * 47vw), 0, 0) scale(calc(.86 + var(--e) * .14));
+  box-shadow: var(--rv-shadow-xl);
+  will-change: transform;
+}
+html.motion-ok .hall.is-built .flow__deck {
+  position: absolute; left: 50%; top: 0; height: 100%;
+  width: calc(5 * var(--col) + 4 * var(--flow-gap));
+  transform-origin: 50% 50%;
+  transform:
+    translate3d(calc(-50% - (1 - var(--e)) * 17%), 0, 0)
+    rotateX(calc((1 - var(--e)) * 20deg + var(--py) * -1.6deg))
+    rotateY(calc(var(--px) * 2.2deg))
+    rotateZ(calc((1 - var(--e)) * -8deg))
+    scale(calc(1 + (1 - var(--e)) * .2));
+  will-change: transform;
+}
+/* Coluna: laço contínuo (três cópias do conteúdo) somado ao deslocamento do scroll. */
+html.motion-ok .hall.is-built .flow__col {
+  --dir: -1; --nudge: 0px;
+  flex: none; width: var(--col);
+  translate: 0 calc(var(--p) * var(--dir) * 280px + var(--nudge));
+  animation: site-rise 80s linear infinite;
+  will-change: transform;
+}
+html.motion-ok .hall.is-built .flow__col--rev { --dir: 1; animation-name: site-fall; animation-duration: 96s; }
+html.motion-ok .hall.is-built .flow__col:nth-child(3) { animation-duration: 68s; }
+html.motion-ok .hall.is-built .flow__col:nth-child(5) { animation-duration: 88s; }
+@keyframes site-rise {
+  from { transform: translate3d(0, calc(-33.3333% - var(--flow-gap) / 3), 0); }
+  to   { transform: translate3d(0, calc(-66.6667% - var(--flow-gap) * 2 / 3), 0); }
+}
+@keyframes site-fall {
+  from { transform: translate3d(0, calc(-66.6667% - var(--flow-gap) * 2 / 3), 0); }
+  to   { transform: translate3d(0, calc(-33.3333% - var(--flow-gap) / 3), 0); }
+}
+html.motion-ok .hall.is-out .flow__col,
+html.motion-ok .flow__deck:focus-within .flow__col { animation-play-state: paused; }
+
+html.motion-ok .card__btn, html.motion-ok .piece__btn { transition: transform var(--rv-dur-3) var(--rv-ease-out), box-shadow var(--rv-dur-3) var(--rv-ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  html.motion-ok .hall.is-built .flow__col:hover,
+  html.motion-ok .wall.is-live .wall__col:hover { animation-play-state: paused; }
+  html.motion-ok .card__btn:hover, html.motion-ok .piece__btn:hover { transform: translate3d(0, -6px, 0) scale(1.03); box-shadow: var(--rv-shadow-xl); }
+}
+html.motion-ok .card__btn:active, html.motion-ok .piece__btn:active { transform: scale(.985); }
+
+@media (min-width: 821px) {
+  html.motion-ok .hall.is-built .flow__tag { top: auto; bottom: 20px; left: 16px; }
+}
+
+/* Entrada: texto em cascata, painel deslizando da direita. */
+html.motion-ok .hall.is-built .hall__copy > * { animation: site-up 700ms var(--rv-ease-out) both; }
+html.motion-ok .hall.is-built .hall__copy > *:nth-child(2) { animation-delay: 70ms; }
+html.motion-ok .hall.is-built .hall__copy > *:nth-child(3) { animation-delay: 140ms; }
+html.motion-ok .hall.is-built .hall__copy > *:nth-child(4) { animation-delay: 210ms; }
+@keyframes site-up { from { opacity: 0; transform: translate3d(0, 16px, 0); } to { opacity: 1; transform: none; } }
+@keyframes site-slide { from { opacity: 0; transform: translate3d(8vw, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes site-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Hero em telas estreitas: texto no alto, painel sobe de baixo ---------- */
+@media (max-width: 820px) {
+  html.motion-ok .hall.is-built { height: 240vh; }
+  html.motion-ok .hall.is-built .hall__stage { --col: 43vw; }
+  html.motion-ok .hall.is-built .hall__copy {
+    top: calc(var(--site-header-h) + var(--site-header-pad) + 22px);
+    left: var(--site-gutter); right: var(--site-gutter); width: auto; gap: 16px;
+    transform: translate3d(0, calc(var(--e) * -48px), 0);
+  }
+  html.motion-ok .hall.is-built .flow__panel {
+    inset: 8px;
+    transform-origin: 50% 0;
+    transform: translate3d(0, calc((1 - var(--e)) * max(55vh, 420px)), 0) scale(calc(.95 + var(--e) * .05));
+  }
+  html.motion-ok .hall.is-built .flow__deck {
+    transform:
+      translate3d(-50%, calc((1 - var(--e)) * -24%), 0)
+      rotateX(calc((1 - var(--e)) * 16deg))
+      rotateZ(calc((1 - var(--e)) * -7deg))
+      scale(calc(1 + (1 - var(--e)) * .12));
+  }
+  @keyframes site-slide { from { opacity: 0; transform: translate3d(0, 8vh, 0); } to { opacity: 1; transform: none; } }
+}
+
+/* ---------- Declaração: revelação por palavra, ligada ao scroll ---------- */
+html.motion-ok .decl__text.is-split { --dp: 0; }
+html.motion-ok .decl__text.is-split .w { display: inline-block; opacity: clamp(.16, calc(var(--dp) * (var(--n) + 3) - var(--i)), 1); }
+
+/* ---------- Parede Suhai: colunas em rolagem contínua, sentidos opostos ---------- */
+html.motion-ok .wall.is-live { height: clamp(520px, 80vh, 780px); padding: 0; }
+html.motion-ok .wall.is-live .wall__plane {
+  position: absolute; left: 6%; right: 6%; top: 0;
+  transform: perspective(1500px) rotateX(14deg) rotateZ(-6deg) scale(1.16);
+  transform-origin: 50% 30%;
+}
+html.motion-ok .wall.is-live .piece[data-repeat] { display: block; }
+html.motion-ok .wall.is-live .wall__col { animation: wall-rise 52s linear infinite; will-change: transform; }
+html.motion-ok .wall.is-live .wall__col--rev { animation-name: wall-fall; animation-duration: 64s; }
+html.motion-ok .wall.is-live .wall__col:nth-child(3) { animation-duration: 58s; }
+/* Conteúdo duplicado: meia altura mais meio gap fecha o laço sem salto. */
+@keyframes wall-rise { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, calc(-50% - var(--wall-gap) / 2), 0); } }
+@keyframes wall-fall { from { transform: translate3d(0, calc(-50% - var(--wall-gap) / 2), 0); } to { transform: translate3d(0, 0, 0); } }
+html.motion-ok .wall.is-live:not(.is-inview) .wall__col { animation-play-state: paused; }
+
+/* ---------- Luz do mouse ----------
+   Só com html.lit-on (o motion.js liga em ponteiro fino com hover e sem reduced motion).
+   O motion.js insere um .lit dentro de cada superfície de fundo de marca (no rv-cover, que já isola
+   os blobs: a luz fica acima do bloom e abaixo de qualquer texto) e um .lit-page fixo no fundo.
+   Por frame ele só escreve --mx/--my no próprio .lit (folha, sem filhos): muda transform, nada de layout. */
+.lit, .lit-page { display: none; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.lit-on .lit, html.lit-on .lit-page {
+    display: block; position: absolute; z-index: 0; left: 0; top: 0; pointer-events: none;
+    width: clamp(280px, 58%, 720px); aspect-ratio: 1; border-radius: 50%;
+    transform: translate3d(calc(var(--mx, 0px) - 50%), calc(var(--my, 0px) - 50%), 0);
+    opacity: 0; transition: opacity var(--rv-dur-4) var(--rv-ease-out);
+    will-change: transform, opacity;
+    background: radial-gradient(circle closest-side, color-mix(in srgb, var(--mist-0) 80%, transparent), color-mix(in srgb, var(--violet-100) 50%, transparent) 42%, color-mix(in srgb, var(--rose-100) 20%, transparent) 70%, transparent);
+    mix-blend-mode: screen;
+  }
+  /* Tons escuros (e o card violeta, que tem texto claro): a luz acende o bloom em cor (soft-light), sem branquear o fundo do texto claro. */
+  html.lit-on .rv-cover:is([data-tone="pine"], [data-tone="night"]) > .lit,
+  html.lit-on .svc__cover .rv-cover[data-tone="violet"] > .lit {
+    background: radial-gradient(circle closest-side, color-mix(in srgb, var(--violet-300) 72%, transparent), color-mix(in srgb, var(--rose-300) 36%, transparent) 46%, transparent);
+    mix-blend-mode: soft-light;
+  }
+  /* Névoa já é quase branca: aqui a luz entra em tom lilás e rosa, para aparecer. */
+  html.lit-on .rv-cover[data-tone="mist"] > .lit {
+    background: radial-gradient(circle closest-side, color-mix(in srgb, var(--violet-100) 85%, transparent), color-mix(in srgb, var(--rose-100) 55%, transparent) 50%, transparent);
+    mix-blend-mode: normal;
+  }
+  html.lit-on .lit.is-on { opacity: 1; }
+  html.lit-on .contact__panel { position: relative; isolation: isolate; overflow: hidden; }
+  html.lit-on .contact__form { position: relative; z-index: 1; }
+  /* Fundo da página: brilho leve, fixo, atrás de todo o conteúdo. */
+  html.lit-on .lit-page {
+    position: fixed; z-index: -1; width: 46vmax; mix-blend-mode: normal;
+    background: radial-gradient(circle closest-side, color-mix(in srgb, var(--violet-100) 70%, transparent), color-mix(in srgb, var(--rose-100) 40%, transparent) 50%, transparent);
+  }
+  html.lit-on .lit-page.is-on { opacity: .9; }
+}
+
+/* ---------- Cards de serviço: troca suave entre a versão visual e a detalhada ---------- */
+html.motion-ok .svc__h, html.motion-ok .svc__detail { transition: opacity var(--rv-dur-3) var(--rv-ease-out), transform var(--rv-dur-3) var(--rv-ease-out), visibility 0s linear var(--rv-dur-3); }
+html.motion-ok .svc__detail { transform: translate3d(0, 12px, 0) scale(.985); }
+html.motion-ok .svc.is-open .svc__detail { transform: none; transition-delay: 60ms, 60ms, 0s; }
+html.motion-ok .svc.is-open .svc__h { transform: scale(.985); }
+html.motion-ok .svc:not(.is-open) .svc__h { transition-delay: 0s, 0s, 0s; }
+
+/* ---------- Processo: as etapas acendem em sequência quando entram na tela ---------- */
+html.motion-ok .proc .rv-process.is-live .rv-process__dot { transition: background-color var(--rv-dur-3) var(--rv-ease-out), border-color var(--rv-dur-3) var(--rv-ease-out), color var(--rv-dur-3) var(--rv-ease-out), box-shadow var(--rv-dur-3) var(--rv-ease-out); }
+html.motion-ok .proc .rv-process.is-live .rv-process__step::before { transform: scale(0); transform-origin: 0 0; transition: transform 520ms var(--rv-ease-out); }
+html.motion-ok .proc .rv-process.is-live .rv-process__step.is-on::before { transform: none; }
+html.motion-ok .proc .rv-process.is-live .rv-process__step > div { opacity: .5; transition: opacity var(--rv-dur-4) var(--rv-ease-out); }
+html.motion-ok .proc .rv-process.is-live .rv-process__step.is-on > div { opacity: 1; }
+
+/* ---------- Entradas simples das seções ---------- */
+html.motion-ok [data-reveal] { opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity 600ms var(--rv-ease-out), transform 600ms var(--rv-ease-out); }
+html.motion-ok [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ---------- Visualizador ---------- */
+html.motion-ok .lb[open]::backdrop, html.motion-ok .lb[open] .lb__close { animation: site-in 240ms var(--rv-ease-out) both; }
+html.motion-ok .lb.is-closing { opacity: 0; transition: opacity 160ms var(--rv-ease-out); }
+
+/* Cinto e suspensório: se a preferência mudar com a página aberta, nada anima. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

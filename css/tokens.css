@@ -1,0 +1,309 @@
+/* ==========================================================================
+   Revo UI · Tokens
+   Fonte única dos fundamentos visuais. Componentes só consomem tokens
+   semânticos (--rv-bg, --rv-text, --rv-action...), nunca os primitivos.
+   ========================================================================== */
+
+:root {
+  /* ---------- Primitivos: Pinho (verde sóbrio, base da marca) ---------- */
+  --pine-950: #071e18;
+  --pine-900: #0c2c24;
+  --pine-800: #123d31;
+  --pine-700: #185040;
+  --pine-600: #1e6651;
+  --pine-500: #2a8167;
+  --pine-400: #4e9e84;
+  --pine-300: #86c3ac;
+  --pine-200: #bcddcf;
+  --pine-100: #ddeee6;
+  --pine-50:  #eff6f2;
+
+  /* ---------- Primitivos: Rosa e Violeta (quebras de cor) ---------- */
+  --rose-700: #a8386a;
+  --rose-500: #e2669a;
+  --rose-300: #f2a6c4;
+  --rose-100: #fbe3ed;
+  --rose-50:  #fdf2f7;
+
+  --violet-700: #5a3fd6;
+  --violet-500: #7c63f5;
+  --violet-300: #b4a6fa;
+  --violet-100: #ece8fe;
+  --violet-50:  #f6f4ff;
+
+  /* ---------- Primitivos: Névoa (neutros levemente esverdeados) ---------- */
+  --mist-0:   #ffffff;
+  --mist-25:  #fafbfb;
+  --mist-50:  #f4f6f5;
+  --mist-100: #eceff0;
+  --mist-200: #dfe4e2;
+  --mist-300: #c7cecb;
+  --mist-400: #9ba6a2;
+  --mist-500: #66726e;
+  --mist-600: #4b5652;
+  --mist-700: #343d3a;
+  --mist-800: #212826;
+  --mist-900: #131816;
+  --mist-950: #0a0e0d;
+
+  /* ---------- Primitivos: feedback ---------- */
+  --amber-700: #8f5509;
+  --amber-500: #d48a1c;
+  --amber-100: #fcefd9;
+  --red-700:   #a62a23;
+  --red-600:   #c7372f;
+  --red-500:   #e0483f;
+  --red-100:   #fbe4e2;
+
+  /* ==================== Semânticos (tema claro) ==================== */
+  color-scheme: light;
+
+  /* Fundo e superfícies */
+  --rv-bg:               #edf1ef;
+  --rv-bg-wash:          radial-gradient(1200px 600px at 8% -10%, rgba(134, 195, 172, .35), transparent 60%),
+                         radial-gradient(900px 500px at 100% 0%, rgba(180, 166, 250, .28), transparent 60%),
+                         radial-gradient(900px 600px at 70% 110%, rgba(242, 166, 196, .26), transparent 60%);
+  --rv-surface:          #ffffff;
+  --rv-surface-raised:   #ffffff;
+  --rv-surface-sunken:   var(--mist-50);
+  --rv-surface-muted:    var(--mist-100);
+  --rv-surface-glass:    rgba(255, 255, 255, .62);
+  --rv-surface-glass-strong: rgba(255, 255, 255, .82);
+  --rv-surface-menu:     #ffffff;
+  --rv-surface-inverse:  var(--pine-950);
+  --rv-overlay:          rgba(7, 30, 24, .38);
+
+  /* Texto */
+  --rv-text:             var(--mist-900);
+  --rv-text-secondary:   var(--mist-600);
+  --rv-text-tertiary:    var(--mist-500);
+  --rv-text-disabled:    var(--mist-400);
+  --rv-text-inverse:     #f3f7f5;
+  --rv-text-on-action:   #ffffff;
+  --rv-text-link:        var(--pine-600);
+
+  /* Bordas */
+  --rv-border-subtle:    var(--mist-100);
+  --rv-border:           var(--mist-200);
+  --rv-border-strong:    var(--mist-300);
+  --rv-border-glass:     rgba(255, 255, 255, .7);
+
+  /* Ações */
+  --rv-action:           var(--pine-800);
+  --rv-action-hover:     var(--pine-700);
+  --rv-action-pressed:   var(--pine-900);
+  --rv-action-soft:      var(--pine-50);
+  --rv-action-soft-hover:var(--pine-100);
+  --rv-action-soft-text: var(--pine-800);
+  --rv-ghost-hover:      rgba(18, 61, 49, .06);
+  --rv-ghost-pressed:    rgba(18, 61, 49, .11);
+  --rv-danger:           var(--red-600);
+  --rv-danger-hover:     var(--red-700);
+  --rv-selected:         var(--pine-50);
+  --rv-selected-border:  var(--pine-500);
+
+  /* Acentos (quebra de cor) */
+  --rv-accent-rose:      var(--rose-500);
+  --rv-accent-rose-soft: var(--rose-50);
+  --rv-accent-rose-text: var(--rose-700);
+  --rv-accent-violet:    var(--violet-500);
+  --rv-accent-violet-soft: var(--violet-50);
+  --rv-accent-violet-text: var(--violet-700);
+
+  /* Feedback */
+  --rv-success:          var(--pine-600);
+  --rv-success-soft:     var(--pine-50);
+  --rv-success-border:   var(--pine-200);
+  --rv-warning:          var(--amber-700);
+  --rv-warning-soft:     #fdf6ea;
+  --rv-warning-border:   #f3d9ad;
+  --rv-warning-solid:    var(--amber-500);
+  --rv-danger-soft:      #fdf1f0;
+  --rv-danger-border:    #f4c4c0;
+  --rv-info:             var(--violet-700);
+  --rv-info-soft:        var(--violet-50);
+  --rv-info-border:      var(--violet-100);
+
+  /* Foco */
+  --rv-focus:            var(--violet-500);
+  --rv-focus-ring:       0 0 0 3px rgba(124, 99, 245, .32);
+  --rv-error-ring:       0 0 0 3px rgba(199, 55, 47, .18);
+
+  /* Gradientes de assinatura (usar com parcimônia: momentos de IA) */
+  --rv-gradient-aurora:  linear-gradient(120deg, #2a8167 0%, #5fb3b8 32%, #7c63f5 64%, #e2669a 100%);
+  --rv-gradient-pine:    linear-gradient(160deg, #1e6651 0%, #0c2c24 100%);
+  --rv-gradient-mist:    linear-gradient(160deg, #f6f9f8 0%, #e8eeec 100%);
+  --rv-gradient-bloom:   radial-gradient(120% 90% at 20% 10%, #f2a6c4 0%, transparent 55%),
+                         radial-gradient(100% 80% at 90% 30%, #b4a6fa 0%, transparent 60%),
+                         radial-gradient(120% 100% at 50% 100%, #86c3ac 0%, transparent 65%),
+                         #e9eef0;
+
+  /* ---------- Tipografia ---------- */
+  --rv-font-sans: "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --rv-font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --rv-fs-display: clamp(40px, 5.2vw, 64px);
+  --rv-fs-h1: clamp(30px, 3.4vw, 40px);
+  --rv-fs-h2: 28px;
+  --rv-fs-h3: 20px;
+  --rv-fs-h4: 16px;
+  --rv-fs-body-lg: 16px;
+  --rv-fs-body: 14px;
+  --rv-fs-small: 13px;
+  --rv-fs-caption: 12px;
+  --rv-fs-overline: 11px;
+  --rv-fs-code: 13px;
+
+  --rv-lh-tight: 1.08;
+  --rv-lh-snug: 1.25;
+  --rv-lh-normal: 1.55;
+
+  --rv-fw-light: 300;
+  --rv-fw-regular: 400;
+  --rv-fw-medium: 500;
+  --rv-fw-semibold: 600;
+
+  --rv-tracking-display: -0.035em;
+  --rv-tracking-heading: -0.02em;
+  --rv-tracking-overline: 0.08em;
+
+  /* ---------- Espaçamento (base 4) ---------- */
+  --rv-space-0-5: 2px;
+  --rv-space-1: 4px;
+  --rv-space-1-5: 6px;
+  --rv-space-2: 8px;
+  --rv-space-3: 12px;
+  --rv-space-4: 16px;
+  --rv-space-5: 20px;
+  --rv-space-6: 24px;
+  --rv-space-8: 32px;
+  --rv-space-10: 40px;
+  --rv-space-12: 48px;
+  --rv-space-16: 64px;
+  --rv-space-20: 80px;
+
+  /* ---------- Raios ---------- */
+  --rv-radius-xs: 6px;
+  --rv-radius-sm: 10px;
+  --rv-radius-md: 14px;
+  --rv-radius-lg: 20px;
+  --rv-radius-xl: 28px;
+  --rv-radius-2xl: 36px;
+  --rv-radius-pill: 999px;
+
+  /* ---------- Sombras ---------- */
+  --rv-shadow-xs: 0 1px 2px rgba(10, 30, 24, .06);
+  --rv-shadow-sm: 0 1px 2px rgba(10, 30, 24, .05), 0 2px 8px rgba(10, 30, 24, .05);
+  --rv-shadow-md: 0 2px 4px rgba(10, 30, 24, .04), 0 8px 24px rgba(10, 30, 24, .08);
+  --rv-shadow-lg: 0 4px 12px rgba(10, 30, 24, .06), 0 20px 48px rgba(10, 30, 24, .12);
+  --rv-shadow-xl: 0 8px 20px rgba(10, 30, 24, .08), 0 32px 80px rgba(10, 30, 24, .18);
+  --rv-shadow-glass: inset 0 1px 0 rgba(255, 255, 255, .75), 0 1px 2px rgba(10, 30, 24, .04), 0 12px 32px rgba(10, 30, 24, .08);
+  --rv-glass-blur: blur(22px) saturate(160%);
+
+  /* ---------- Movimento ---------- */
+  --rv-dur-1: 120ms;
+  --rv-dur-2: 200ms;
+  --rv-dur-3: 320ms;
+  --rv-dur-4: 520ms;
+  --rv-ease-out: cubic-bezier(.2, .8, .2, 1);
+  --rv-ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --rv-ease-spring: cubic-bezier(.34, 1.4, .64, 1);
+
+  /* ---------- Camadas ---------- */
+  --rv-z-sticky: 20;
+  --rv-z-dropdown: 50;
+  --rv-z-drawer: 80;
+  --rv-z-modal: 90;
+  --rv-z-palette: 95;
+  --rv-z-toast: 100;
+  --rv-z-tooltip: 110;
+
+  /* ---------- Ícones ---------- */
+  --rv-icon-sm: 14px;
+  --rv-icon-md: 16px;
+  --rv-icon-lg: 20px;
+  --rv-icon-stroke: 1.6;
+
+  /* ---------- Controles ---------- */
+  --rv-control-sm: 32px;
+  --rv-control-md: 40px;
+  --rv-control-lg: 48px;
+}
+
+/* ==================== Tema escuro ==================== */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --rv-bg:               #090d0c;
+  --rv-bg-wash:          radial-gradient(1100px 600px at 6% -10%, rgba(42, 129, 103, .22), transparent 60%),
+                         radial-gradient(900px 500px at 100% 0%, rgba(124, 99, 245, .16), transparent 60%),
+                         radial-gradient(900px 600px at 70% 110%, rgba(226, 102, 154, .12), transparent 60%);
+  --rv-surface:          #111715;
+  --rv-surface-raised:   #161e1b;
+  --rv-surface-sunken:   #0c1110;
+  --rv-surface-muted:    #1b2421;
+  --rv-surface-glass:    rgba(22, 30, 27, .62);
+  --rv-surface-glass-strong: rgba(22, 30, 27, .86);
+  --rv-surface-menu:     #18211e;
+  --rv-surface-inverse:  #eff6f2;
+  --rv-overlay:          rgba(0, 0, 0, .55);
+
+  --rv-text:             #eef3f1;
+  --rv-text-secondary:   #a8b4b0;
+  --rv-text-tertiary:    #85918d;
+  --rv-text-disabled:    #56615d;
+  --rv-text-inverse:     #0c2c24;
+  --rv-text-on-action:   #ffffff;
+  --rv-text-link:        var(--pine-300);
+
+  --rv-border-subtle:    rgba(255, 255, 255, .05);
+  --rv-border:           rgba(255, 255, 255, .09);
+  --rv-border-strong:    rgba(255, 255, 255, .16);
+  --rv-border-glass:     rgba(255, 255, 255, .08);
+
+  --rv-action:           var(--pine-500);
+  --rv-action-hover:     #33937a;
+  --rv-action-pressed:   var(--pine-600);
+  --rv-action-soft:      rgba(42, 129, 103, .16);
+  --rv-action-soft-hover:rgba(42, 129, 103, .26);
+  --rv-action-soft-text: var(--pine-200);
+  --rv-ghost-hover:      rgba(255, 255, 255, .06);
+  --rv-ghost-pressed:    rgba(255, 255, 255, .1);
+  --rv-danger:           var(--red-500);
+  --rv-danger-hover:     #ea5d55;
+  --rv-selected:         rgba(42, 129, 103, .14);
+  --rv-selected-border:  var(--pine-400);
+
+  --rv-accent-rose-soft: rgba(226, 102, 154, .14);
+  --rv-accent-rose-text: var(--rose-300);
+  --rv-accent-violet-soft: rgba(124, 99, 245, .16);
+  --rv-accent-violet-text: var(--violet-300);
+
+  --rv-success:          var(--pine-300);
+  --rv-success-soft:     rgba(42, 129, 103, .14);
+  --rv-success-border:   rgba(78, 158, 132, .35);
+  --rv-warning:          #f0b45a;
+  --rv-warning-soft:     rgba(212, 138, 28, .12);
+  --rv-warning-border:   rgba(212, 138, 28, .32);
+  --rv-danger-soft:      rgba(224, 72, 63, .12);
+  --rv-danger-border:    rgba(224, 72, 63, .34);
+  --rv-info:             var(--violet-300);
+  --rv-info-soft:        rgba(124, 99, 245, .13);
+  --rv-info-border:      rgba(124, 99, 245, .3);
+
+  --rv-focus:            var(--violet-300);
+  --rv-focus-ring:       0 0 0 3px rgba(180, 166, 250, .35);
+
+  --rv-gradient-mist:    linear-gradient(160deg, #141b19 0%, #0e1412 100%);
+  --rv-gradient-bloom:   radial-gradient(120% 90% at 20% 10%, rgba(226, 102, 154, .55) 0%, transparent 55%),
+                         radial-gradient(100% 80% at 90% 30%, rgba(124, 99, 245, .55) 0%, transparent 60%),
+                         radial-gradient(120% 100% at 50% 100%, rgba(42, 129, 103, .6) 0%, transparent 65%),
+                         #121917;
+
+  --rv-shadow-xs: 0 1px 2px rgba(0, 0, 0, .4);
+  --rv-shadow-sm: 0 1px 2px rgba(0, 0, 0, .35), 0 2px 8px rgba(0, 0, 0, .25);
+  --rv-shadow-md: 0 2px 4px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+  --rv-shadow-lg: 0 4px 12px rgba(0, 0, 0, .35), 0 20px 48px rgba(0, 0, 0, .45);
+  --rv-shadow-xl: 0 8px 20px rgba(0, 0, 0, .4), 0 32px 80px rgba(0, 0, 0, .55);
+  --rv-shadow-glass: inset 0 1px 0 rgba(255, 255, 255, .06), 0 12px 32px rgba(0, 0, 0, .35);
+}

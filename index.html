@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revo Studio: studio criativo AI first para o mercado de seguros</title>
+  <!-- PREMISSA: a tagline "Ofício de studio. Velocidade de IA." está em aprovação. Aparece na meta description, og:title, og:image:alt, slogan do JSON-LD e no h1. -->
+  <meta name="description" content="Marca, vídeo, sites, design sob demanda e personagens de IA para seguradoras, insurtechs, entidades e grandes corretoras. Ofício de studio, velocidade de IA.">
+  <!-- PREMISSA: domínio ainda não definido. canonical e og:url usam revostudio.com.br até a decisão. -->
+  <link rel="canonical" href="https://revostudio.com.br/">
+  <meta name="theme-color" content="#edf1ef">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Revo Studio">
+  <meta property="og:url" content="https://revostudio.com.br/">
+  <meta property="og:title" content="Revo Studio. Ofício de studio. Velocidade de IA.">
+  <!-- PREMISSA: "fluência em seguros" em aprovação. -->
+  <meta property="og:description" content="Studio criativo AI first com fluência em seguros. O trabalho fala primeiro.">
+  <meta property="og:image" content="https://revostudio.com.br/assets/og/og-revo-v3.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Painel de trabalhos do Revo Studio em movimento sobre fundo claro, com a frase &quot;Ofício de studio. Velocidade de IA.&quot;">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Revo Studio. Ofício de studio. Velocidade de IA.">
+  <meta name="twitter:description" content="Studio criativo AI first com fluência em seguros. O trabalho fala primeiro.">
+  <meta name="twitter:image" content="https://revostudio.com.br/assets/og/og-revo-v3.jpg">
+  <meta name="twitter:image:alt" content="Painel de trabalhos do Revo Studio em movimento sobre fundo claro, com a frase &quot;Ofício de studio. Velocidade de IA.&quot;">
+
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+
+  <!-- Fontes Geist self-hosted (assets/fonts, @font-face em css/site.css). -->
+  <link rel="preload" href="assets/fonts/geist-300-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/revo-ui.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/motion.css">
+
+  <!-- Guarda de JS e de motion. "js" marca script ativo. "motion-ok" entra antes do primeiro paint (só sem prefers-reduced-motion) e sai sozinha se o motion.js não sinalizar em 2,5 s. Sem essas classes a página é o mosaico estático, com tudo legível. -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add("js");
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return;
+      d.classList.add("motion-ok");
+      setTimeout(function () { if (!window.__motionReady) d.classList.remove("motion-ok"); }, 2500);
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Revo Studio",
+    "url": "https://revostudio.com.br/",
+    "logo": "https://revostudio.com.br/assets/brand/logo.svg",
+    "description": "Marca, vídeo, sites, design sob demanda e personagens de IA para seguradoras, insurtechs, entidades e grandes corretoras. Ofício de studio, velocidade de IA.",
+    "slogan": "Ofício de studio. Velocidade de IA.",
+    "parentOrganization": { "@type": "Organization", "name": "Segbox" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Para quem o Revo trabalha?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Seguradoras, insurtechs, entidades do setor e grandes corretoras com time ou pessoa de marketing. Para corretores autônomos e pequenas corretoras, o caminho são os produtos da Segbox."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual a relação entre o Revo e a Segbox?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O Revo é um studio criativo powered by segbox. O time vem da Segbox, que nasceu como agência de marketing para seguros e hoje constrói tecnologia para seguradoras."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vocês usam IA em tudo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A IA entra na exploração, na produção e nas versões. Conceito, direção, aprovação e acabamento são do time. Usamos modelos com licença comercial e entregamos a peça pronta para o fluxo de aprovação da sua empresa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai ficar com cara de IA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Não. Todo trabalho passa por conceito, direção de arte, curadoria e finalização, como em qualquer studio. O que muda é a velocidade entre a ideia e o primeiro frame."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como funciona o design sob demanda?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Um time do Revo fica por conta da demanda contínua da sua área. Os pedidos entram por um canal único, e o prazo de cada um depende do tamanho do pedido."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O personagem de IA pertence a quem?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "À sua marca. Nunca usamos rosto ou voz de pessoa real sem contrato, e o personagem é criado sem semelhança com personagens que já existem."
+      }
+    }
+  ]
+}
+  </script>
+
+  <script src="js/icons.js" defer></script>
+  <script src="js/site.js" defer></script>
+  <script src="js/motion.js" defer></script>
+</head>
+<body class="rv">
+
+<a class="site-skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="site-container rv-site">
+    <div class="rv-sitenav is-glass">
+      <a href="#inicio" class="rv-sitenav__logo" aria-label="Revo Studio, início"><img class="site-logo" src="assets/brand/logo-endosso.svg" alt="" width="124" height="58" decoding="async"></a>
+      <div class="rv-sitenav__end">
+        <a href="#contato" class="rv-btn rv-btn--primary sm"><span>Fale com a gente</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- 01 · HERO: fluxo de trabalhos. Sem JS ou com prefers-reduced-motion, o painel abaixo é um mosaico estático em cinco colunas. Com motion, as colunas correm em sentidos opostos e o scroll abre o painel até a tela inteira. -->
+<!-- PREMISSA DE TITULARIDADE: tudo o que aparece no painel precisa ser trabalho que o Revo pode mostrar. Cada peça com material de cliente leva data-cliente e pode sair uma a uma sem quebrar a cena. -->
+<section id="inicio" class="hall" aria-labelledby="hero-titulo" data-hall>
+  <div class="hall__stage" data-hall-stage>
+
+    <div class="hall__copy" data-hall-copy>
+      <p class="rv-overline rv-hero__kicker"><i aria-hidden="true"></i>Studio criativo AI first</p>
+      <!-- PREMISSA: tagline recomendada em business/posicionamento.md, seção 4, ainda em aprovação. Alternativa prevista: "IA na produção. Critério na direção." -->
+      <h1 id="hero-titulo" class="rv-hero__title hall__title">Ofício de studio.<br>Velocidade de IA.</h1>
+      <!-- PREMISSA: "fluência em seguros" (posicionamento, seção 3), em aprovação. -->
+      <p class="rv-hero__lead">Criação para seguradoras, insurtechs, entidades e grandes corretoras. Com fluência em seguros.</p>
+      <div class="rv-btn-group">
+        <a class="rv-btn rv-btn--primary lg" href="#contato"><span>Agendar uma conversa</span></a>
+        <a class="rv-btn rv-btn--secondary lg" href="#daas"><span>Ver o trabalho</span></a>
+      </div>
+    </div>
+
+    <div class="flow" data-flow>
+     <div class="flow__panel" data-flow-panel>
+      <div class="rv-cover rv-cover--fill" data-tone="mist" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></div>
+      <!-- A antiga "palavra do chão" virou a etiqueta do painel (padrão rv-cover__tag). Decorativa. -->
+      <span class="rv-cover__tag flow__tag" aria-hidden="true">Feito no Revo</span>
+      <div class="flow__deck" role="group" aria-label="Trabalhos do Revo Studio" data-flow-deck>
+      <ul class="flow__col" data-flow-col>
+        <!-- PREMISSA: titularidade do vídeo a confirmar (sem marca visível). -->
+        <li class="card" data-ar="p"><button type="button" class="card__btn" data-open data-kind="video" data-full="assets/video/ai-influencer-01.mp4" data-poster="assets/video/ai-influencer-01-poster.jpg" data-w="720" data-h="1280"><span class="rv-sr">Abrir vídeo</span><video class="card__media" src="assets/video/ai-influencer-01-360.mp4" poster="assets/video/ai-influencer-01-poster.jpg" width="720" height="1280" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video></button></li>
+        <!-- PREMISSA: uso autorizado pela Suhai pendente de confirmação. -->
+        <li class="card" data-cliente="suhai"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/suhai-podium.jpg" data-avif="assets/img/suhai-podium.avif" data-w="960" data-h="1200"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-podium-480.avif"><img class="card__media" src="assets/img/suhai-podium-480.jpg" alt="Peça de design" width="480" height="600" decoding="async"></picture></button></li>
+        <li class="card"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/work-portal.jpg" data-avif="assets/img/work-portal.avif" data-w="800" data-h="446"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/work-portal-480.avif"><img class="card__media" src="assets/img/work-portal-480.jpg" alt="Site" width="480" height="268" decoding="async"></picture></button></li>
+        <li class="card"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/card-identidade.jpg" data-avif="assets/img/card-identidade.avif" data-w="644" data-h="800"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/card-identidade-480.avif"><img class="card__media" src="assets/img/card-identidade-480.jpg" alt="Identidade visual" width="480" height="596" decoding="async"></picture></button></li>
+      </ul>
+      <ul class="flow__col flow__col--rev" data-flow-col>
+        <li class="card"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/card-sites.jpg" data-avif="assets/img/card-sites.avif" data-w="644" data-h="800"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/card-sites-480.avif"><img class="card__media" src="assets/img/card-sites-480.jpg" alt="Site" width="480" height="596" decoding="async"></picture></button></li>
+        <!-- PREMISSA: uso autorizado pelo cliente pendente de confirmação (Guararapes Corretora). -->
+        <li class="card" data-cliente="guararapes" data-ar="p"><button type="button" class="card__btn" data-open data-kind="video" data-full="assets/video/mascote-guara.mp4" data-poster="assets/video/mascote-guara-poster.jpg" data-w="720" data-h="1280"><span class="rv-sr">Abrir vídeo</span><video class="card__media" src="assets/video/mascote-guara-360.mp4" poster="assets/video/mascote-guara-poster.jpg" width="720" height="1280" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video></button></li>
+        <!-- PREMISSA: uso autorizado pelo cliente pendente de confirmação (JRB&B). Outdoor recortado: só o terço esquerdo da peça, sem o valor em reais da imagem original. -->
+        <li class="card" data-cliente="jrbb"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/mascote-beta-outdoor.jpg" data-avif="assets/img/mascote-beta-outdoor.avif" data-w="800" data-h="450"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/mascote-beta-outdoor-480.avif"><img class="card__media" src="assets/img/mascote-beta-outdoor-480.jpg" alt="Personagem de marca" width="480" height="270" decoding="async"></picture></button></li>
+        <!-- PREMISSA: uso autorizado pela Suhai pendente de confirmação. -->
+        <li class="card" data-cliente="suhai"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/suhai-key-02.jpg" data-avif="assets/img/suhai-key-02.avif" data-w="752" data-h="1344"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-key-02-480.avif"><img class="card__media" src="assets/img/suhai-key-02-480.jpg" alt="Peça de design" width="480" height="858" decoding="async"></picture></button></li>
+      </ul>
+      <ul class="flow__col" data-flow-col>
+        <!-- PREMISSA: uso autorizado pelo cliente pendente de confirmação (SullaVita). -->
+        <li class="card" data-cliente="sullavita"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/mascote-vick.jpg" data-avif="assets/img/mascote-vick.avif" data-w="518" data-h="800"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/mascote-vick-480.avif"><img class="card__media" src="assets/img/mascote-vick-480.jpg" alt="Personagem de marca" width="480" height="741" decoding="async"></picture></button></li>
+        <!-- PREMISSA: uso autorizado pelo cliente pendente de confirmação (JRB&B). -->
+        <li class="card" data-cliente="jrbb" data-ar="l"><button type="button" class="card__btn" data-open data-kind="video" data-full="assets/video/mascote-beta.mp4" data-poster="assets/video/mascote-beta-poster.jpg" data-w="1280" data-h="714"><span class="rv-sr">Abrir vídeo</span><video class="card__media" src="assets/video/mascote-beta-360.mp4" poster="assets/video/mascote-beta-poster.jpg" width="1280" height="714" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video></button></li>
+        <!-- PREMISSA: uso autorizado pela Suhai pendente de confirmação. -->
+        <li class="card" data-cliente="suhai" data-ar="t"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/suhai-email.jpg" data-avif="assets/img/suhai-email.avif" data-w="900" data-h="2091"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-email-480.avif"><img class="card__media" src="assets/img/suhai-email-480.jpg" alt="Peça de design" width="480" height="1115" decoding="async"></picture></button></li>
+        <li class="card"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/card-daas.jpg" data-avif="assets/img/card-daas.avif" data-w="644" data-h="800"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/card-daas-480.avif"><img class="card__media" src="assets/img/card-daas-480.jpg" alt="Peça de design" width="480" height="596" decoding="async"></picture></button></li>
+      </ul>
+      <ul class="flow__col flow__col--rev" data-flow-col>
+        <!-- PREMISSA: uso autorizado pelo cliente pendente de confirmação (Baeta). -->
+        <li class="card" data-cliente="baeta" data-ar="p"><button type="button" class="card__btn" data-open data-kind="video" data-full="assets/video/ai-influencer-baeta.mp4" data-poster="assets/video/ai-influencer-baeta-poster.jpg" data-w="720" data-h="1280"><span class="rv-sr">Abrir vídeo</span><video class="card__media" src="assets/video/ai-influencer-baeta-360.mp4" poster="assets/video/ai-influencer-baeta-poster.jpg" width="720" height="1280" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video></button></li>
+        <li class="card"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/work-insurtech.jpg" data-avif="assets/img/work-insurtech.avif" data-w="644" data-h="800"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/work-insurtech-480.avif"><img class="card__media" src="assets/img/work-insurtech-480.jpg" alt="Identidade visual" width="480" height="596" decoding="async"></picture></button></li>
+        <!-- PREMISSA: uso autorizado pela Suhai pendente de confirmação. -->
+        <li class="card" data-cliente="suhai"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/suhai-key-01.jpg" data-avif="assets/img/suhai-key-01.avif" data-w="800" data-h="1417"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-key-01-480.avif"><img class="card__media" src="assets/img/suhai-key-01-480.jpg" alt="Peça de design" width="480" height="850" decoding="async"></picture></button></li>
+      </ul>
+      <ul class="flow__col" data-flow-col>
+        <!-- PREMISSA: uso autorizado pela Suhai pendente de confirmação. -->
+        <li class="card" data-cliente="suhai"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/suhai-key-03.jpg" data-avif="assets/img/suhai-key-03.avif" data-w="752" data-h="1344"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-key-03-480.avif"><img class="card__media" src="assets/img/suhai-key-03-480.jpg" alt="Peça de design" width="480" height="858" decoding="async"></picture></button></li>
+        <!-- PREMISSA: uso autorizado pelo cliente pendente de confirmação (Guararapes Corretora). -->
+        <li class="card" data-cliente="guararapes" data-ar="s"><button type="button" class="card__btn" data-open data-kind="video" data-full="assets/video/mascote-guara-giro.mp4" data-poster="assets/video/mascote-guara-giro-poster.jpg" data-w="720" data-h="720"><span class="rv-sr">Abrir vídeo</span><video class="card__media" src="assets/video/mascote-guara-giro-360.mp4" poster="assets/video/mascote-guara-giro-poster.jpg" width="720" height="720" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video></button></li>
+        <!-- PREMISSA: o frame mostra o mascote da Guararapes Corretora; uso autorizado pelo cliente pendente de confirmação. -->
+        <li class="card" data-cliente="guararapes"><button type="button" class="card__btn" data-open data-kind="img" data-full="assets/img/servico-video.jpg" data-avif="assets/img/servico-video.avif" data-w="640" data-h="800"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/servico-video-480.avif"><img class="card__media" src="assets/img/servico-video-480.jpg" alt="Personagem de marca" width="480" height="600" decoding="async"></picture></button></li>
+      </ul>
+      </div>
+     </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 02 · DECLARAÇÃO -->
+<!-- PREMISSA: opção A da copy. "Conhece o mercado de seguros por dentro" se apoia na origem do time na Segbox. -->
+<section class="decl" aria-label="Declaração" data-decl>
+  <div class="site-container">
+   <div class="decl__panel">
+    <div class="rv-cover rv-cover--fill" data-tone="rose" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></div>
+    <p class="decl__text" data-decl-text>Ideia, ofício e acabamento de studio, com quem já conhece o mercado de seguros por dentro.</p>
+   </div>
+  </div>
+</section>
+
+<!-- 03 · SERVIÇOS: cards de serviço do design system (versão visual). O card é um botão: ao clicar, vira a versão detalhada (rv-service--detail) no mesmo lugar. Sem JS, as duas versões aparecem empilhadas. -->
+<!-- PREMISSA: "Falar com a Revo" foi o texto pedido para o botão; o resto da página usa "o Revo". O card de sites usa "Sites e landing pages", por extenso. -->
+<section id="servicos" class="serv" aria-labelledby="serv-titulo">
+  <div class="site-container">
+    <header class="site-head" data-reveal>
+      <p class="rv-overline rv-hero__kicker"><i aria-hidden="true"></i>Serviços</p>
+      <h2 id="serv-titulo" class="rv-section-title site-title">Do que você precisa? Isso é o que fazemos.</h2>
+    </header>
+    <ul class="serv__grid">
+      <li class="svc" data-svc>
+        <h3 class="svc__h"><button type="button" class="rv-service rv-service--cover svc__cover" data-tone="pine" aria-expanded="false" aria-controls="svc-1" data-svc-open>
+          <span class="rv-cover rv-cover--fill" data-tone="pine" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></span>
+          <span class="rv-cover__tag">Marca</span>
+          <span class="rv-service__body"><span class="rv-service__title">Identidade visual</span><span class="rv-service__text">Logotipo, sistema visual e kit para a rede aplicar a marca sem quebrar.</span><span class="rv-sr">Ver detalhes</span></span>
+        </button></h3>
+        <div id="svc-1" class="rv-service rv-service--detail svc__detail" role="group" aria-label="Identidade visual: detalhes" tabindex="-1" data-svc-detail>
+          <div class="rv-service__top"><span class="rv-service__n">01</span><span class="rv-badge rv-badge--outline svc__badge" data-tone="pine">Marca</span></div>
+          <p class="rv-service__title">Identidade visual</p>
+          <p class="rv-service__text">Para insurtech nova ou em rebranding, seguradora lançando marca de produto ou canal, entidade do setor e grande corretora. A marca é testada em contexto real antes da aprovação e chega à rede com modelos que o corretor consegue usar.</p>
+          <ul class="rv-service__list"><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Estratégia e conceito de marca</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Logotipo e sistema visual</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Guia de marca</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Aplicações principais</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Kit de aplicação para a rede</span></li></ul>
+          <div class="rv-service__foot"><a class="rv-btn rv-btn--primary" href="#contato"><span>Falar com a Revo</span></a><button type="button" class="rv-btn rv-btn--ghost svc__close" data-svc-close><span>Fechar detalhes</span></button></div>
+        </div>
+      </li>
+      <li class="svc" data-svc>
+        <h3 class="svc__h"><button type="button" class="rv-service rv-service--cover svc__cover" data-tone="night" aria-expanded="false" aria-controls="svc-2" data-svc-open>
+          <span class="rv-cover rv-cover--fill" data-tone="night" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></span>
+          <span class="rv-cover__tag">Vídeo</span>
+          <span class="rv-service__body"><span class="rv-service__title">Vídeo com IA</span><span class="rv-service__text">Comerciais e institucionais com direção de studio e a agilidade da IA.</span><span class="rv-sr">Ver detalhes</span></span>
+        </button></h3>
+        <div id="svc-2" class="rv-service rv-service--detail svc__detail" role="group" aria-label="Vídeo com IA: detalhes" tabindex="-1" data-svc-detail>
+          <div class="rv-service__top"><span class="rv-service__n">02</span><span class="rv-badge rv-badge--outline svc__badge" data-tone="night">Vídeo</span></div>
+          <p class="rv-service__title">Vídeo com IA</p>
+          <p class="rv-service__text">Do conceito à finalização, com direção de arte, montagem, trilha e cor de studio. A IA gera cenas, personagens e versões. Você vê o filme muito antes do que veria em uma produção tradicional.</p>
+          <ul class="rv-service__list"><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Conceito criativo</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Filme finalizado</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Versões por formato e duração</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Cortes para redes</span></li></ul>
+          <div class="rv-service__foot"><a class="rv-btn rv-btn--primary" href="#contato"><span>Falar com a Revo</span></a><button type="button" class="rv-btn rv-btn--ghost svc__close" data-svc-close><span>Fechar detalhes</span></button></div>
+        </div>
+      </li>
+      <li class="svc" data-svc>
+        <h3 class="svc__h"><button type="button" class="rv-service rv-service--cover svc__cover" data-tone="mist" aria-expanded="false" aria-controls="svc-3" data-svc-open>
+          <span class="rv-cover rv-cover--fill" data-tone="mist" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></span>
+          <span class="rv-cover__tag">Site</span>
+          <span class="rv-service__body"><span class="rv-service__title">Sites e landing pages</span><span class="rv-service__text">Design, copy, desenvolvimento e publicação, sem depender da fila de TI.</span><span class="rv-sr">Ver detalhes</span></span>
+        </button></h3>
+        <div id="svc-3" class="rv-service rv-service--detail svc__detail" role="group" aria-label="Sites e landing pages: detalhes" tabindex="-1" data-svc-detail>
+          <div class="rv-service__top"><span class="rv-service__n">03</span><span class="rv-badge rv-badge--outline svc__badge" data-tone="mist">Site</span></div>
+          <p class="rv-service__title">Sites e landing pages</p>
+          <p class="rv-service__text">Site institucional, página de produto, de campanha, de evento ou de captação para o canal corretor. Você aprova um protótipo navegável cedo, e a página chega junto com a campanha, não depois dela.</p>
+          <ul class="rv-service__list"><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Design e copy</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Protótipo navegável</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Desenvolvimento e publicação</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Imagens e vídeos no estilo da marca</span></li></ul>
+          <div class="rv-service__foot"><a class="rv-btn rv-btn--primary" href="#contato"><span>Falar com a Revo</span></a><button type="button" class="rv-btn rv-btn--ghost svc__close" data-svc-close><span>Fechar detalhes</span></button></div>
+        </div>
+      </li>
+      <li class="svc" data-svc>
+        <h3 class="svc__h"><button type="button" class="rv-service rv-service--cover svc__cover" data-tone="violet" aria-expanded="false" aria-controls="svc-4" data-svc-open>
+          <span class="rv-cover rv-cover--fill" data-tone="violet" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></span>
+          <span class="rv-cover__tag">DaaS</span>
+          <span class="rv-service__body"><span class="rv-service__title">Design sob demanda</span><span class="rv-service__text">Um time para a demanda que não para: rede, comercial, comunicação interna.</span><span class="rv-sr">Ver detalhes</span></span>
+        </button></h3>
+        <div id="svc-4" class="rv-service rv-service--detail svc__detail" role="group" aria-label="Design sob demanda: detalhes" tabindex="-1" data-svc-detail>
+          <div class="rv-service__top"><span class="rv-service__n">04</span><span class="rv-badge rv-badge--outline svc__badge" data-tone="violet">DaaS</span></div>
+          <p class="rv-service__title">Design sob demanda</p>
+          <p class="rv-service__text">Fluxo contínuo de peças para quem fala com a rede toda semana. Os pedidos entram por um canal único. A IA cuida das variações, dos formatos e das imagens sob medida.</p>
+          <ul class="rv-service__list"><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Peças para a rede de corretores</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Alertas e avisos urgentes</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Comunicação interna</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Criativos com variações para teste</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Adaptação de formatos</span></li></ul>
+          <div class="rv-service__foot"><a class="rv-btn rv-btn--primary" href="#contato"><span>Falar com a Revo</span></a><button type="button" class="rv-btn rv-btn--ghost svc__close" data-svc-close><span>Fechar detalhes</span></button></div>
+        </div>
+      </li>
+      <li class="svc" data-svc>
+        <h3 class="svc__h"><button type="button" class="rv-service rv-service--cover svc__cover" data-tone="rose" aria-expanded="false" aria-controls="svc-5" data-svc-open>
+          <span class="rv-cover rv-cover--fill" data-tone="rose" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></span>
+          <span class="rv-cover__tag">Personagem</span>
+          <span class="rv-service__body"><span class="rv-service__title">Mascotes e AI creators</span><span class="rv-service__text">Um porta-voz próprio e consistente, feito com IA, para vídeo e redes.</span><span class="rv-sr">Ver detalhes</span></span>
+        </button></h3>
+        <div id="svc-5" class="rv-service rv-service--detail svc__detail" role="group" aria-label="Mascotes e AI creators: detalhes" tabindex="-1" data-svc-detail>
+          <div class="rv-service__top"><span class="rv-service__n">05</span><span class="rv-badge rv-badge--outline svc__badge" data-tone="rose">Personagem</span></div>
+          <p class="rv-service__title">Mascotes e AI creators</p>
+          <p class="rv-service__text">Um personagem que pertence à sua marca, sem agenda de influenciador nem risco de imagem. Nunca usamos rosto ou voz de pessoa real sem contrato.</p>
+          <ul class="rv-service__list"><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Visual, personalidade e voz</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Guia do personagem</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Banco de imagens e poses</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Vídeos curtos</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Diretrizes de uso para o seu time</span></li></ul>
+          <div class="rv-service__foot"><a class="rv-btn rv-btn--primary" href="#contato"><span>Falar com a Revo</span></a><button type="button" class="rv-btn rv-btn--ghost svc__close" data-svc-close><span>Fechar detalhes</span></button></div>
+        </div>
+      </li>
+      <!-- PREMISSA: proposta do serviço Campanhas Meta Ads ainda não aprovada. Se não for aprovada, este card sai inteiro e o grid volta a cinco cards. -->
+      <li class="svc" data-svc>
+        <h3 class="svc__h"><button type="button" class="rv-service rv-service--cover svc__cover" data-tone="pine" aria-expanded="false" aria-controls="svc-6" data-svc-open>
+          <span class="rv-cover rv-cover--fill" data-tone="pine" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></span>
+          <span class="rv-cover__tag">Campanhas</span>
+          <span class="rv-service__body"><span class="rv-service__title">Campanhas Meta Ads</span><span class="rv-service__text">A campanha inteira: criativo, landing page, mídia na Meta e acompanhamento dos leads, em ciclos.</span><span class="rv-sr">Ver detalhes</span></span>
+        </button></h3>
+        <div id="svc-6" class="rv-service rv-service--detail svc__detail" role="group" aria-label="Campanhas Meta Ads: detalhes" tabindex="-1" data-svc-detail>
+          <div class="rv-service__top"><span class="rv-service__n">06</span><span class="rv-badge rv-badge--outline svc__badge" data-tone="pine">Campanhas</span></div>
+          <p class="rv-service__title">Campanhas Meta Ads</p>
+          <p class="rv-service__text">Entendemos o desafio e a verba, montamos o plano do ciclo e executamos tudo: criativos estáticos e em vídeo, landing page, rastreamento e anúncios no Facebook e no Instagram. Acompanhamos os leads com o seu time e ajustamos a rota a cada ciclo. Entregamos audiência e leads; a venda segue com o seu comercial.</p>
+          <ul class="rv-service__list"><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Diagnóstico e plano do ciclo</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Criativos estáticos e vídeos curtos</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Landing page da campanha</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Gestão das campanhas na Meta</span></li><li><i data-lucide="check" class="rv-icon sm" aria-hidden="true"></i><span>Acompanhamento dos leads e relatórios</span></li></ul>
+          <div class="rv-service__foot"><a class="rv-btn rv-btn--primary" href="#contato"><span>Falar com a Revo</span></a><button type="button" class="rv-btn rv-btn--ghost svc__close" data-svc-close><span>Fechar detalhes</span></button></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 04 · DaaS + SUHAI -->
+<!-- PREMISSA: relação com a Suhai e uso das peças dependem de autorização. Sem autorização, a linha vira "Tudo nesta parede saiu desse fluxo.", o aria-label da parede vira "Peças de design sob demanda" e as peças com marca visível saem ou são trocadas. Nenhum dado do contrato entra na página. -->
+<section id="daas" class="daas" aria-labelledby="daas-titulo" data-cliente="suhai">
+  <div class="site-container daas__grid">
+    <div class="daas__copy" data-reveal>
+      <p class="rv-overline rv-hero__kicker"><i aria-hidden="true"></i>Design sob demanda</p>
+      <h2 id="daas-titulo" class="rv-section-title site-title">Design no ritmo da sua rede.</h2>
+      <p class="site-lead">DaaS é design como serviço: um time do Revo para a demanda de toda semana. Peça para a rede de corretores, alerta urgente, comunicação interna, criativo para teste. Para áreas de marketing, canais e growth que não podem esperar a fila.</p>
+      <p class="daas__proof">É assim que atendemos a Suhai. Tudo nesta parede saiu desse fluxo.</p>
+      <div class="rv-btn-group">
+        <a class="rv-btn rv-btn--secondary lg" href="#contato"><span>Conversar sobre DaaS</span></a>
+      </div>
+    </div>
+
+    <!-- Parede de peças sobre o fundo de marca pinho. As repetições (data-repeat) só existem para dar volume em movimento: ficam fora da leitura e somem no modo estático. -->
+    <div class="wall" role="region" aria-label="Peças criadas para a Suhai" data-wall>
+      <div class="rv-cover rv-cover--fill" data-tone="pine" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></div>
+      <div class="wall__plane">
+        <ul class="wall__col" data-wall-col>
+          <li class="piece"><button type="button" class="piece__btn" data-open data-kind="img" data-full="assets/img/suhai-podium.jpg" data-avif="assets/img/suhai-podium.avif" data-w="960" data-h="1200"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-podium-480.avif"><img class="piece__media" src="assets/img/suhai-podium-480.jpg" alt="Peça de design" width="480" height="600" loading="lazy" decoding="async"></picture></button></li>
+          <li class="piece" data-repeat aria-hidden="true"><button type="button" class="piece__btn" tabindex="-1" data-open data-kind="img" data-full="assets/img/suhai-key-02.jpg" data-avif="assets/img/suhai-key-02.avif" data-w="752" data-h="1344"><picture><source type="image/avif" srcset="assets/img/suhai-key-02-480.avif"><img class="piece__media" src="assets/img/suhai-key-02-480.jpg" alt="" width="480" height="858" loading="lazy" decoding="async"></picture></button></li>
+          <li class="piece" data-ar="t" data-repeat aria-hidden="true"><button type="button" class="piece__btn" tabindex="-1" data-open data-kind="img" data-full="assets/img/suhai-email.jpg" data-avif="assets/img/suhai-email.avif" data-w="900" data-h="2091"><picture><source type="image/avif" srcset="assets/img/suhai-email-480.avif"><img class="piece__media" src="assets/img/suhai-email-480.jpg" alt="" width="480" height="1115" loading="lazy" decoding="async"></picture></button></li>
+        </ul>
+        <ul class="wall__col wall__col--rev" data-wall-col>
+          <li class="piece"><button type="button" class="piece__btn" data-open data-kind="img" data-full="assets/img/suhai-key-01.jpg" data-avif="assets/img/suhai-key-01.avif" data-w="800" data-h="1417"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-key-01-480.avif"><img class="piece__media" src="assets/img/suhai-key-01-480.jpg" alt="Peça de design" width="480" height="850" loading="lazy" decoding="async"></picture></button></li>
+          <li class="piece" data-ar="t"><button type="button" class="piece__btn" data-open data-kind="img" data-full="assets/img/suhai-email.jpg" data-avif="assets/img/suhai-email.avif" data-w="900" data-h="2091"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-email-480.avif"><img class="piece__media" src="assets/img/suhai-email-480.jpg" alt="Peça de design" width="480" height="1115" loading="lazy" decoding="async"></picture></button></li>
+          <li class="piece" data-repeat aria-hidden="true"><button type="button" class="piece__btn" tabindex="-1" data-open data-kind="img" data-full="assets/img/suhai-key-03.jpg" data-avif="assets/img/suhai-key-03.avif" data-w="752" data-h="1344"><picture><source type="image/avif" srcset="assets/img/suhai-key-03-480.avif"><img class="piece__media" src="assets/img/suhai-key-03-480.jpg" alt="" width="480" height="858" loading="lazy" decoding="async"></picture></button></li>
+        </ul>
+        <ul class="wall__col" data-wall-col>
+          <li class="piece"><button type="button" class="piece__btn" data-open data-kind="img" data-full="assets/img/suhai-key-03.jpg" data-avif="assets/img/suhai-key-03.avif" data-w="752" data-h="1344"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-key-03-480.avif"><img class="piece__media" src="assets/img/suhai-key-03-480.jpg" alt="Peça de design" width="480" height="858" loading="lazy" decoding="async"></picture></button></li>
+          <li class="piece"><button type="button" class="piece__btn" data-open data-kind="img" data-full="assets/img/suhai-key-02.jpg" data-avif="assets/img/suhai-key-02.avif" data-w="752" data-h="1344"><span class="rv-sr">Abrir trabalho</span><picture><source type="image/avif" srcset="assets/img/suhai-key-02-480.avif"><img class="piece__media" src="assets/img/suhai-key-02-480.jpg" alt="Peça de design" width="480" height="858" loading="lazy" decoding="async"></picture></button></li>
+          <li class="piece" data-repeat aria-hidden="true"><button type="button" class="piece__btn" tabindex="-1" data-open data-kind="img" data-full="assets/img/suhai-podium.jpg" data-avif="assets/img/suhai-podium.avif" data-w="960" data-h="1200"><picture><source type="image/avif" srcset="assets/img/suhai-podium-480.avif"><img class="piece__media" src="assets/img/suhai-podium-480.jpg" alt="" width="480" height="600" loading="lazy" decoding="async"></picture></button></li>
+          <li class="piece" data-repeat aria-hidden="true"><button type="button" class="piece__btn" tabindex="-1" data-open data-kind="img" data-full="assets/img/suhai-key-01.jpg" data-avif="assets/img/suhai-key-01.avif" data-w="800" data-h="1417"><picture><source type="image/avif" srcset="assets/img/suhai-key-01-480.avif"><img class="piece__media" src="assets/img/suhai-key-01-480.jpg" alt="" width="480" height="850" loading="lazy" decoding="async"></picture></button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · PROCESSO: rv-process sobre fundo de marca violeta, em cartão de vidro. -->
+<section id="processo" class="proc" aria-labelledby="proc-titulo">
+  <div class="site-container">
+    <div class="proc__panel">
+      <div class="rv-cover rv-cover--fill" data-tone="violet" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></div>
+      <div class="proc__card" data-reveal>
+        <header class="site-head">
+          <p class="rv-overline rv-hero__kicker"><i aria-hidden="true"></i>Como trabalhamos</p>
+          <h2 id="proc-titulo" class="rv-section-title site-title">Pensamos junto com os nossos clientes.</h2>
+        </header>
+        <ol class="rv-process" data-process>
+          <li class="rv-process__step"><span class="rv-process__dot">01</span><div><h3>Briefing</h3><p>Uma conversa para entender contexto, público, prazo e quem aprova.</p></div></li>
+          <li class="rv-process__step"><span class="rv-process__dot">02</span><div><h3>Conceito</h3><p>Caminhos criativos com racional. Você escolhe um antes de produzir.</p></div></li>
+          <li class="rv-process__step"><span class="rv-process__dot">03</span><div><h3>Produção</h3><p>Direção de arte, roteiro, layout ou personagem, conforme o serviço.</p></div></li>
+          <li class="rv-process__step"><span class="rv-process__dot">04</span><div><h3>Finalização</h3><p>Acabamento, revisão e arquivos prontos para o fluxo de aprovação do seu time.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · LOGOS: faixa de logos do design system, em wordmark tipográfico (sem arquivo de logo de terceiros). -->
+<!-- PREMISSA geral: MAPFRE, Suhai e Baeta constam como clientes da Segbox; mostrar cada uma depende de autorização, uma a uma. Com menos de três autorizadas, a faixa sai da página. -->
+<section class="logos" aria-labelledby="logos-titulo">
+  <div class="site-container">
+    <div class="rv-logos" data-reveal>
+      <h2 id="logos-titulo" class="rv-overline">Marcas que o nosso time já atendeu</h2>
+      <ul class="rv-logos__row">
+        <!-- PREMISSA: uso do nome e do logo depende de autorização (MAPFRE). -->
+        <li class="rv-logos__item" data-cliente="mapfre">MAPFRE</li>
+        <!-- PREMISSA: uso do nome e do logo depende de autorização (Suhai). -->
+        <li class="rv-logos__item" data-cliente="suhai">Suhai</li>
+        <!-- PREMISSA: uso do nome e do logo depende de autorização (Baeta). -->
+        <li class="rv-logos__item" data-cliente="baeta">Baeta</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · PERGUNTAS: rv-accordion rv-faq. Sem JS, todas as respostas ficam abertas. -->
+<!-- PREMISSA: a resposta 2 cita a Segbox fora do rodapé (endosso de origem). A resposta 5 fala em "canal único" sem nomear a ferramenta. -->
+<section id="perguntas" class="faq" aria-labelledby="faq-titulo">
+  <div class="site-container faq__grid">
+    <header class="site-head" data-reveal>
+      <p class="rv-overline rv-hero__kicker"><i aria-hidden="true"></i>Perguntas</p>
+      <h2 id="faq-titulo" class="rv-section-title site-title">O que costumam perguntar antes de conversar.</h2>
+    </header>
+    <div class="rv-accordion rv-faq" data-reveal>
+      <div class="rv-accordion__item"><h3 class="faq__q"><button type="button" class="rv-accordion__trigger" id="faq-1-t" aria-expanded="true" aria-controls="faq-1" data-faq><span>Para quem o Revo trabalha?</span><i data-lucide="chevron-down" class="rv-icon rv-chev" aria-hidden="true"></i></button></h3><div id="faq-1" class="rv-collapse is-open" role="region" aria-labelledby="faq-1-t"><div><div class="rv-accordion__panel">Seguradoras, insurtechs, entidades do setor e grandes corretoras com time ou pessoa de marketing. Para corretores autônomos e pequenas corretoras, o caminho são os produtos da Segbox.</div></div></div></div>
+      <div class="rv-accordion__item"><h3 class="faq__q"><button type="button" class="rv-accordion__trigger" id="faq-2-t" aria-expanded="false" aria-controls="faq-2" data-faq><span>Qual a relação entre o Revo e a Segbox?</span><i data-lucide="chevron-down" class="rv-icon rv-chev" aria-hidden="true"></i></button></h3><div id="faq-2" class="rv-collapse" role="region" aria-labelledby="faq-2-t"><div><div class="rv-accordion__panel">O Revo é um studio criativo powered by segbox. O time vem da Segbox, que nasceu como agência de marketing para seguros e hoje constrói tecnologia para seguradoras.</div></div></div></div>
+      <div class="rv-accordion__item"><h3 class="faq__q"><button type="button" class="rv-accordion__trigger" id="faq-3-t" aria-expanded="false" aria-controls="faq-3" data-faq><span>Vocês usam IA em tudo?</span><i data-lucide="chevron-down" class="rv-icon rv-chev" aria-hidden="true"></i></button></h3><div id="faq-3" class="rv-collapse" role="region" aria-labelledby="faq-3-t"><div><div class="rv-accordion__panel">A IA entra na exploração, na produção e nas versões. Conceito, direção, aprovação e acabamento são do time. Usamos modelos com licença comercial e entregamos a peça pronta para o fluxo de aprovação da sua empresa.</div></div></div></div>
+      <div class="rv-accordion__item"><h3 class="faq__q"><button type="button" class="rv-accordion__trigger" id="faq-4-t" aria-expanded="false" aria-controls="faq-4" data-faq><span>Vai ficar com cara de IA?</span><i data-lucide="chevron-down" class="rv-icon rv-chev" aria-hidden="true"></i></button></h3><div id="faq-4" class="rv-collapse" role="region" aria-labelledby="faq-4-t"><div><div class="rv-accordion__panel">Não. Todo trabalho passa por conceito, direção de arte, curadoria e finalização, como em qualquer studio. O que muda é a velocidade entre a ideia e o primeiro frame.</div></div></div></div>
+      <div class="rv-accordion__item"><h3 class="faq__q"><button type="button" class="rv-accordion__trigger" id="faq-5-t" aria-expanded="false" aria-controls="faq-5" data-faq><span>Como funciona o design sob demanda?</span><i data-lucide="chevron-down" class="rv-icon rv-chev" aria-hidden="true"></i></button></h3><div id="faq-5" class="rv-collapse" role="region" aria-labelledby="faq-5-t"><div><div class="rv-accordion__panel">Um time do Revo fica por conta da demanda contínua da sua área. Os pedidos entram por um canal único, e o prazo de cada um depende do tamanho do pedido.</div></div></div></div>
+      <div class="rv-accordion__item"><h3 class="faq__q"><button type="button" class="rv-accordion__trigger" id="faq-6-t" aria-expanded="false" aria-controls="faq-6" data-faq><span>O personagem de IA pertence a quem?</span><i data-lucide="chevron-down" class="rv-icon rv-chev" aria-hidden="true"></i></button></h3><div id="faq-6" class="rv-collapse" role="region" aria-labelledby="faq-6-t"><div><div class="rv-accordion__panel">À sua marca. Nunca usamos rosto ou voz de pessoa real sem contrato, e o personagem é criado sem semelhança com personagens que já existem.</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · CHAMADA FINAL (rv-ctaband, fundo noite) e CONTATO (rv-contact sobre o gradiente de marca). -->
+<section class="call" aria-labelledby="call-titulo">
+  <div class="site-container">
+    <div class="rv-ctaband call__band" data-reveal>
+      <div class="rv-cover rv-cover--fill" data-tone="night" aria-hidden="true"><span class="rv-cover__blob a"></span><span class="rv-cover__blob b"></span><span class="rv-cover__blob c"></span></div>
+      <div class="rv-ctaband__body">
+        <h2 id="call-titulo" class="rv-section-title call__title">O próximo trabalho desta página pode ser o seu.</h2>
+        <!-- PREMISSA: resposta por e-mail, sem prazo. Depende de existir alguém recebendo os envios. -->
+        <p>Conte o que você precisa criar. O time do studio responde por <span class="site-nowrap">e-mail</span>.</p>
+        <div class="rv-btn-group"><a href="#contato" class="rv-btn rv-btn--glass lg"><span>Agendar uma conversa</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="contact" aria-label="Contato">
+  <div class="site-container">
+    <div class="contact__panel">
+      <!-- PREMISSA: formulário curto de três campos por diretriz desta versão; o posicionamento (seção 6.4) recomenda um formulário qualificado. Destino do lead (SITE_CONFIG.leadEndpoint) ainda não definido. -->
+      <form class="rv-contact contact__form" id="contato-form" data-contact novalidate data-reveal>
+        <p class="rv-sr" role="alert" data-form-alert></p>
+        <div class="rv-field">
+          <label class="rv-field__label" for="f-nome"><span>Nome</span></label>
+          <div class="rv-input lg"><input id="f-nome" name="nome" type="text" placeholder="Seu nome e sobrenome" autocomplete="name" required aria-describedby="f-nome-err"></div>
+          <p class="rv-field__hint" id="f-nome-err" data-err hidden>Escreva seu nome.</p>
+        </div>
+        <div class="rv-field">
+          <label class="rv-field__label" for="f-email"><span>E-mail corporativo</span></label>
+          <div class="rv-input lg"><input id="f-email" name="email" type="email" placeholder="voce@empresa.com.br" autocomplete="email" required aria-describedby="f-email-err"></div>
+          <p class="rv-field__hint" id="f-email-err" data-err hidden>Confira o e-mail. Parece faltar alguma coisa.</p>
+        </div>
+        <div class="rv-field">
+          <label class="rv-field__label" for="f-msg"><span>Mensagem</span></label>
+          <div class="rv-input rv-input--textarea"><textarea id="f-msg" name="mensagem" rows="4" placeholder="O que você precisa criar?" required aria-describedby="f-msg-err"></textarea></div>
+          <p class="rv-field__hint" id="f-msg-err" data-err hidden>Escreva uma linha sobre o que você precisa.</p>
+        </div>
+        <div class="rv-contact__foot">
+          <button type="submit" class="rv-btn rv-btn--primary lg"><span>Enviar mensagem</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-container rv-site">
+    <div class="rv-footer">
+      <div class="rv-footer__brand">
+        <img class="site-logo" src="assets/brand/logo-endosso.svg" alt="Revo, powered by segbox" width="172" height="80" decoding="async">
+        <p>Revo Studio. Studio criativo AI first para o mercado de seguros.</p>
+      </div>
+      <nav class="rv-footer__col" aria-label="Studio"><span class="rv-overline">Studio</span><a href="#processo">Como trabalhamos</a><a href="#perguntas">Perguntas</a></nav>
+      <nav class="rv-footer__col" aria-label="Contato"><span class="rv-overline">Contato</span><a href="#contato">Fale com a gente</a></nav>
+      <div class="rv-footer__base"><span>© 2026 Revo Studio</span><span class="site-footer__endosso">powered by segbox</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Visualizador de trabalho: uma peça em tamanho grande, sem legenda. Esc fecha e o foco volta para a peça de origem. -->
+<dialog class="lb" data-lb aria-label="Trabalho ampliado">
+  <div class="lb__body" data-lb-body></div>
+  <button type="button" class="rv-btn rv-btn--secondary lb__close" data-lb-close><span>Fechar</span></button>
+</dialog>
+
+</body>
+</html>

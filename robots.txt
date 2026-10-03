@@ -1,0 +1,4 @@
+# Revo Studio: liberado para buscadores e robôs de IA.
+# sitemap.xml entra quando o domínio for definido (PREMISSA).
+User-agent: *
+Allow: /

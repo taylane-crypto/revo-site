@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Revo Studio · site.css (v3b)
+   Página em Revo UI (tema claro): tokens de tokens.css e componentes rv-* de
+   revo-ui.css. Aqui fica só o layout da página e o estado ESTÁTICO das cenas
+   (o que aparece sem JS e com prefers-reduced-motion: mosaico de trabalhos,
+   tudo legível). O movimento fica em motion.css.
+   Cores: só tokens.
+   ========================================================================== */
+
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 300 700; font-display: swap; src: url("../assets/fonts/geist-300-700-latin.woff2") format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("../assets/fonts/geist-mono-400-latin.woff2") format("woff2"); }
+
+:root {
+  --site-max: 1240px;
+  --site-gutter: clamp(16px, 4vw, 48px);
+  --site-section-y: clamp(72px, 10vw, 136px);
+  --site-header-h: 72px;
+  --site-header-pad: 14px;
+  --site-frame: 5px;            /* moldura de vidro dos cartões de trabalho */
+  --flow-gap: clamp(10px, 1.2vw, 18px);
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body.rv { overflow-x: hidden; overflow-x: clip; font-size: var(--rv-fs-body-lg); }
+.rv img, .rv video, .rv svg { display: block; max-width: 100%; }
+.rv h1, .rv h2, .rv h3, .rv p, .rv ul { margin: 0; }
+.rv ul { padding: 0; list-style: none; }
+.rv a.rv-btn { text-decoration: none; }
+
+.site-container { width: 100%; max-width: calc(var(--site-max) + 2 * var(--site-gutter)); margin: 0 auto; padding: 0 var(--site-gutter); }
+
+.site-skip { position: fixed; left: 16px; top: 12px; z-index: var(--rv-z-toast); padding: 10px 16px; border-radius: var(--rv-radius-pill); background: var(--rv-action); color: var(--rv-text-on-action); font-weight: var(--rv-fw-medium); text-decoration: none; transform: translateY(-300%); }
+.rv a.site-skip { color: var(--rv-text-on-action); }
+.site-skip:focus { transform: none; }
+
+.site-lead { max-width: 32em; font-size: clamp(16px, 1.3vw, 18px); line-height: var(--rv-lh-normal); color: var(--rv-text-secondary); }
+.site-title { font-size: clamp(32px, 4vw, 56px); text-wrap: balance; }
+
+/* ---------- Topo: rv-sitenav em vidro, preso no alto ---------- */
+.site-header { position: fixed; inset: 0 0 auto 0; z-index: var(--rv-z-sticky); padding-top: var(--site-header-pad); pointer-events: none; }
+.site-header .rv-sitenav { pointer-events: auto; }
+.site-header .rv-sitenav { height: var(--site-header-h); }
+.site-header .rv-sitenav__logo { color: var(--rv-text); }
+/* Logo completo (com o endosso "powered by segbox"): nunca abaixo de 120 px de largura. */
+.site-logo { width: 124px; min-width: 120px; height: auto; object-fit: contain; }
+.rv-footer__brand .site-logo { width: 172px; }
+.site-head { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; max-width: 760px; margin-bottom: clamp(28px, 4vw, 48px); }
+
+/* Lavagens de cor entre seções: rosa e violeta como quebra, sempre por token. */
+.serv, .daas, .logos, .faq { position: relative; }
+.serv::before, .daas::before, .faq::before { content: ""; position: absolute; inset: -12% 0; z-index: -1; pointer-events: none; }
+.serv::before { background: radial-gradient(38% 46% at 100% 38%, color-mix(in srgb, var(--violet-300) 34%, transparent), transparent 72%), radial-gradient(34% 36% at 0% 70%, color-mix(in srgb, var(--rose-300) 30%, transparent), transparent 72%); }
+.daas::before { background: radial-gradient(40% 46% at 0% 42%, color-mix(in srgb, var(--pine-300) 34%, transparent), transparent 72%); }
+.faq::before { background: radial-gradient(36% 48% at 100% 60%, color-mix(in srgb, var(--rose-300) 30%, transparent), transparent 72%), radial-gradient(30% 36% at 4% 32%, color-mix(in srgb, var(--violet-300) 26%, transparent), transparent 72%); }
+
+/* ---------- 01 · Hero (estado estático: texto e painel em mosaico) ---------- */
+.hall { position: relative; }
+.hall__stage { position: relative; padding: calc(var(--site-header-h) + var(--site-header-pad) + clamp(40px, 7vw, 88px)) 0 clamp(32px, 5vw, 64px); }
+
+.hall__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; max-width: calc(var(--site-max) + 2 * var(--site-gutter)); margin: 0 auto; padding: 0 var(--site-gutter); }
+.hall__title { font-size: clamp(40px, 5.3vw, 84px); text-wrap: balance; }
+
+.flow { margin-top: clamp(36px, 5vw, 64px); padding: 0 clamp(8px, 1.2vw, 16px); }
+.flow__panel { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--rv-radius-2xl); padding: 56px clamp(12px, 2.4vw, 32px) clamp(12px, 2.4vw, 32px); }
+.flow__panel > .rv-cover { z-index: 0; }
+.flow__tag { z-index: 3; }
+.rv-cover[data-tone] ~ .flow__tag, .flow__tag.flow__tag { background: var(--rv-surface-glass-strong); border-color: var(--rv-border-glass); color: var(--rv-text); -webkit-backdrop-filter: var(--rv-glass-blur); backdrop-filter: var(--rv-glass-blur); }
+.site-nowrap { white-space: nowrap; }
+.flow__deck { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: var(--flow-gap); }
+.flow__col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--flow-gap); }
+
+.card, .piece { display: block; }
+.card__btn, .piece__btn {
+  display: block; width: 100%; padding: var(--site-frame);
+  border: 1px solid var(--rv-border-glass); border-radius: var(--rv-radius-lg);
+  background: var(--rv-surface-glass-strong);
+  box-shadow: var(--rv-shadow-md);
+  cursor: zoom-in;
+}
+.card__media, .piece__media { width: 100%; height: auto; border-radius: calc(var(--rv-radius-lg) - var(--site-frame)); background: var(--rv-surface-muted); object-fit: cover; }
+.card[data-ar="p"] .card__media { aspect-ratio: 9 / 16; }
+.card[data-ar="l"] .card__media { aspect-ratio: 16 / 9; }
+.card[data-ar="s"] .card__media { aspect-ratio: 1 / 1; }
+.card[data-ar="t"] .card__media, .piece[data-ar="t"] .piece__media { aspect-ratio: 4 / 5; object-position: 50% 0; }
+.card__btn:focus-visible, .piece__btn:focus-visible { outline: none; box-shadow: var(--rv-focus-ring), var(--rv-shadow-md); border-color: var(--rv-focus); }
+
+/* ---------- 02 · Declaração (fundo de marca rosa) ---------- */
+.decl { padding: clamp(40px, 6vw, 88px) 0 var(--site-section-y); }
+.decl__panel { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--rv-radius-2xl); padding: clamp(44px, 9vw, 136px) clamp(22px, 6vw, 96px); box-shadow: var(--rv-shadow-md); }
+.decl__panel > .rv-cover { z-index: 0; }
+.decl__text { position: relative; z-index: 1; max-width: 17.5em; font-size: clamp(30px, 5vw, 76px); font-weight: var(--rv-fw-light); line-height: 1.04; letter-spacing: -0.045em; color: var(--pine-950); text-wrap: balance; }
+
+/* ---------- 03 · Serviços: card visual vira card detalhado no mesmo lugar ---------- */
+.serv { padding: 0 0 var(--site-section-y); scroll-margin-top: 96px; }
+.serv__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; }
+.svc { grid-column: span 2; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.svc__h { display: flex; font: inherit; }
+.svc__cover { width: 100%; min-height: 240px; padding: 0; border: 0; text-align: left; cursor: pointer; }
+.svc__cover .rv-cover { display: block; }
+.svc__cover .rv-service__text { font-size: var(--rv-fs-body); max-width: 30em; }
+/* Card de capa violeta: texto claro (AA). O blob escuro (violet-700) cobre toda a faixa do texto embaixo,
+   o blob claro vai para o canto superior direito, longe do texto, e a etiqueta ganha pílula escura própria. */
+.svc__cover[data-tone="violet"] { color: var(--rv-text-inverse); }
+.svc__cover[data-tone="violet"] .rv-cover__tag { background: var(--violet-700); border-color: color-mix(in srgb, var(--mist-0) 35%, transparent); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.svc__cover .rv-cover[data-tone="violet"] .rv-cover__blob.a { left: auto; right: -16%; top: -24%; width: 52%; height: 48%; }
+.svc__cover .rv-cover[data-tone="violet"] .rv-cover__blob.b { left: -24%; right: -24%; width: auto; bottom: -22%; height: 82%; opacity: 1; }
+.svc__detail { position: relative; overflow: hidden; flex: 1; }
+.svc__detail::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--rv-gradient-aurora); }
+.svc__detail:focus { outline: none; }
+.svc__detail:focus-visible { box-shadow: var(--rv-focus-ring); }
+.svc__detail .rv-service__text, .svc__detail .rv-service__list { font-size: var(--rv-fs-body); }
+.svc__badge { font-family: var(--rv-font-mono); font-size: var(--rv-fs-overline); font-weight: var(--rv-fw-regular); letter-spacing: var(--rv-tracking-overline); text-transform: uppercase; }
+.svc__badge[data-tone="pine"] { background: var(--rv-action-soft); color: var(--rv-action-soft-text); border-color: transparent; }
+.svc__badge[data-tone="night"] { background: var(--rv-surface-inverse); color: var(--rv-text-inverse); border-color: transparent; }
+.svc__badge[data-tone="violet"] { background: var(--rv-accent-violet-soft); color: var(--rv-accent-violet-text); border-color: transparent; }
+.svc__badge[data-tone="rose"] { background: var(--rv-accent-rose-soft); color: var(--rv-accent-rose-text); border-color: transparent; }
+.svc__close { margin-left: auto; }
+html:not(.ui) .svc__close { display: none; }
+/* Com o site.js ativo (html.ui): as duas versões ocupam a mesma célula e só uma aparece. */
+html.ui .svc { display: grid; gap: 0; }
+html.ui .svc > * { grid-area: 1 / 1; min-width: 0; }
+html.ui .svc__cover { min-height: 400px; height: 100%; }
+html.ui .svc__detail { visibility: hidden; opacity: 0; }
+html.ui .svc.is-open .svc__detail { visibility: visible; opacity: 1; }
+html.ui .svc.is-open .svc__h { visibility: hidden; opacity: 0; }
+
+/* ---------- 03 · DaaS + Suhai ---------- */
+.daas { padding: clamp(40px, 6vw, 80px) 0 var(--site-section-y); scroll-margin-top: 80px; }
+.daas__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.daas__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+.daas__proof { max-width: 24em; padding-left: 16px; border-left: 2px solid var(--rv-accent-rose); font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; letter-spacing: var(--rv-tracking-heading); color: var(--rv-text); }
+
+.wall { --wall-gap: 12px; position: relative; isolation: isolate; overflow: hidden; min-width: 0; border-radius: var(--rv-radius-2xl); padding: clamp(14px, 2vw, 24px); box-shadow: var(--rv-shadow-lg); }
+.wall > .rv-cover { z-index: 0; }
+.wall__plane { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--wall-gap); align-items: start; }
+.wall__col { display: flex; flex-direction: column; gap: var(--wall-gap); }
+.piece[data-repeat] { display: none; }
+.piece__btn { border-color: var(--rv-border-glass); background: var(--rv-surface-glass); }
+
+/* ---------- 05 · Processo (fundo de marca violeta, cartão de vidro) ---------- */
+.proc { padding: 0 0 var(--site-section-y); scroll-margin-top: 96px; }
+.proc__panel { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--rv-radius-2xl); padding: clamp(10px, 2.4vw, 32px); box-shadow: var(--rv-shadow-md); }
+.proc__panel > .rv-cover { z-index: 0; }
+.proc__card { position: relative; z-index: 1; container-type: inline-size; padding: clamp(22px, 4vw, 48px); border-radius: var(--rv-radius-xl); background: var(--rv-surface-glass-strong); border: 1px solid var(--rv-border-glass); -webkit-backdrop-filter: var(--rv-glass-blur); backdrop-filter: var(--rv-glass-blur); box-shadow: var(--rv-shadow-glass); }
+.proc .rv-process__step p { font-size: var(--rv-fs-body); }
+/* A linha entre as etapas percorre o gradiente de assinatura: cada trecho tem um tom. */
+.proc .rv-process__step::before { background: var(--rv-gradient-aurora); background-size: 300% 300%; }
+.proc .rv-process__step:nth-child(2)::before { background-position: 50% 50%; }
+.proc .rv-process__step:nth-child(3)::before { background-position: 100% 100%; }
+.proc .rv-process__step.is-on .rv-process__dot { background: var(--rv-action); border-color: var(--rv-action); color: var(--rv-text-on-action); box-shadow: 0 0 0 5px var(--rv-action-soft); }
+
+/* ---------- 06 · Logos ---------- */
+.logos { padding: 0 0 var(--site-section-y); }
+.logos .rv-logos__item { font-size: var(--rv-fs-body-lg); color: var(--rv-text-secondary); }
+
+/* ---------- 07 · Perguntas ---------- */
+.faq { padding: 0 0 var(--site-section-y); scroll-margin-top: 96px; }
+.faq__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 80px); align-items: start; }
+.faq__q { font: inherit; }
+.faq .rv-accordion__panel { color: var(--rv-text-secondary); font-size: var(--rv-fs-body-lg); }
+html:not(.ui) .faq .rv-collapse { grid-template-rows: 1fr; }
+
+/* ---------- 08 · Chamada final e contato ---------- */
+.call { padding: 0 0 clamp(14px, 2vw, 24px); }
+.call__band { min-height: clamp(320px, 34vw, 440px); }
+.call__title { font-size: clamp(32px, 4vw, 56px); text-wrap: balance; }
+.call__band .rv-ctaband__body { gap: 18px; max-width: 720px; }
+.call__band .rv-ctaband__body p { font-size: clamp(16px, 1.3vw, 18px); }
+.contact { padding: 0 0 var(--site-section-y); scroll-margin-top: 96px; }
+.contact__panel { display: grid; justify-items: center; border-radius: var(--rv-radius-2xl); padding: clamp(14px, 5vw, 72px) clamp(10px, 4vw, 56px); background: var(--rv-gradient-bloom); }
+.contact__form { width: 100%; max-width: 640px; gap: 20px; }
+.contact__form .rv-input input, .contact__form .rv-input textarea { font-size: var(--rv-fs-body-lg); }
+.contact__form .rv-input--textarea textarea { min-height: 112px; }
+.contact__form .rv-field__hint { font-size: var(--rv-fs-small); }
+.form__done h3 { font-size: clamp(26px, 2.6vw, 36px); font-weight: var(--rv-fw-light); letter-spacing: var(--rv-tracking-display); line-height: 1.1; }
+.form__done p { color: var(--rv-text-secondary); }
+.form__done:focus { outline: none; }
+
+/* ---------- Rodapé (rv-footer) ---------- */
+.site-footer { padding: 0 0 28px; }
+.site-footer .rv-footer__brand p { margin-top: var(--rv-space-6); font-size: var(--rv-fs-body); }
+/* Duas colunas de navegação (Studio e Contato): a marca fica com metade da largura e as colunas dividem o resto. */
+@container (min-width: 761px) { .site-footer .rv-footer { grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr)); } }
+.site-footer__endosso { text-transform: none; color: var(--rv-text); }
+
+/* ---------- Visualizador ---------- */
+.lb { width: 100vw; max-width: none; height: 100vh; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--rv-text); overflow: hidden; }
+.lb::backdrop { background: var(--rv-overlay); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.lb__body { position: absolute; inset: 0; display: grid; place-items: center; padding: 72px 20px 28px; overflow: auto; cursor: zoom-out; }
+.lb__media { display: block; width: auto; height: auto; max-width: min(92vw, 1400px); max-height: calc(100vh - 108px); max-height: calc(100dvh - 108px); border: var(--site-frame) solid var(--rv-surface); border-radius: var(--rv-radius-xl); background: var(--rv-surface); box-shadow: var(--rv-shadow-xl); cursor: default; }
+.lb__media--tall { max-height: none; width: min(92vw, 620px); align-self: start; }
+.lb__close { position: absolute; top: 16px; right: var(--site-gutter); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+  .daas__grid, .faq__grid { grid-template-columns: minmax(0, 1fr); }
+  .svc { grid-column: span 3; }
+}
+@media (max-width: 700px) {
+  .flow__deck { flex-wrap: wrap; }
+  .flow__col { flex: 1 1 28%; }
+  .wall { --wall-gap: 8px; }
+  .svc { grid-column: span 6; }
+  html.ui .svc__cover { min-height: 300px; }
+}
