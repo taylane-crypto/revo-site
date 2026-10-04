@@ -151,8 +151,8 @@ html.motion-ok .wall.is-live { height: clamp(520px, 80vh, 780px); padding: 0; }
 html.motion-ok .wall.is-live .wall__plane {
   position: absolute; left: 6%; right: 6%; top: 0;
   transform: perspective(1500px) rotateX(14deg) rotateZ(-6deg) scale(1.16);
-  /* Origem em 25%: com as artes 03 e 04 o plano ficou cerca de 20% mais alto; 25% mantém o pivô onde os 30% caíam antes e o vão do canto não cresce. */
-  transform-origin: 50% 25%;
+  /* Origem em 23%: o plano cresceu com as artes 03 e 04 e depois com os vídeos caminhão, Creta e 04; 23% mantém o pivô na altura de antes e o vão do canto não cresce (medido). */
+  transform-origin: 50% 23%;
 }
 html.motion-ok .wall.is-live .piece[data-repeat] { display: block; }
 html.motion-ok .wall.is-live .wall__col { animation: wall-rise 52s linear infinite; will-change: transform; }
