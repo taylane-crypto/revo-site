@@ -12,7 +12,9 @@
       etapas acendem em sequência.
    5. Entradas simples por IntersectionObserver.
    6. H1 dinâmico: digita, segura, apaga e troca os termos (bloco do hero).
-   Sem bibliotecas, sem canvas, sem setInterval.
+   7. Ícones dos serviços: no hover (ou foco por teclado) o ícone se desfaz em
+      pixels que sobem como poeira; ao sair, os pixels voltam e o remontam.
+   Sem bibliotecas e sem setInterval. Único canvas: o pó dos ícones (7).
    ========================================================================== */
 (function () {
   "use strict";
@@ -351,6 +353,101 @@
     root.addEventListener("pointerleave", function () {
       if (cur) cur.lit.classList.remove("is-on");
       cur = null; on = false; page.classList.remove("is-on");
+    });
+  })();
+
+  /* ====================================================================== */
+  /* 7 · Ícones dos serviços: dissolução em pixels                         */
+  /* ====================================================================== */
+  /* O SVG do ícone é rasterizado uma vez numa grade de CELL px; cada célula cheia vira um pixel.
+     O progresso t (0 → 1) é o único estado: cada pixel tem atraso, deriva e redemoinho próprios,
+     então sair do card só roda t de volta e o ícone se remonta pelo mesmo caminho. Fora do hover
+     nada roda e o SVG nítido volta ao lugar. */
+  (function iconDust() {
+    var SIZE = 28, CELL = 2, R = 4, PX = 56, PT = 110, PB = 18;
+    var W = SIZE + PX * 2, H = SIZE + PT + PB;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    function rasterize(svg, done) {
+      var n = SIZE / CELL, S = n * R;
+      var c = svg.cloneNode(true);
+      c.setAttribute("width", S); c.setAttribute("height", S);
+      c.setAttribute("stroke", "#000"); c.setAttribute("stroke-width", "2");
+      var img = new Image();
+      img.onload = function () {
+        var oc = document.createElement("canvas"); oc.width = oc.height = S;
+        var o = oc.getContext("2d");
+        o.drawImage(img, 0, 0, S, S);
+        var d = o.getImageData(0, 0, S, S).data, out = [];
+        for (var gy = 0; gy < n; gy++) for (var gx = 0; gx < n; gx++) {
+          var a = 0;
+          for (var yy = 0; yy < R; yy++) for (var xx = 0; xx < R; xx++) a += d[((gy * R + yy) * S + gx * R + xx) * 4 + 3];
+          a /= R * R * 255;
+          if (a < 0.26) continue;
+          var x = gx * CELL, y = gy * CELL, rnd = Math.random;
+          out.push({
+            x: x, y: y, a: Math.min(1, a * 1.5),
+            d: 0.34 * (y / SIZE) + 0.12 * (1 - x / SIZE) + 0.14 * rnd(), /* de cima para baixo, com ruído */
+            vx: (rnd() - 0.62) * 70, vy: -(46 + rnd() * 64),
+            sw: 3 + rnd() * 9, ph: rnd() * Math.PI * 2, fq: 1.2 + rnd() * 1.6
+          });
+        }
+        done(out);
+      };
+      img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(new XMLSerializer().serializeToString(c));
+    }
+
+    $$(".svc__icon").forEach(function (wrap) {
+      var svg = $("svg", wrap), card = wrap.closest(".svc__cover");
+      if (!svg || !card) return;
+      var cv = document.createElement("canvas");
+      cv.className = "svc__dust"; cv.setAttribute("aria-hidden", "true");
+      cv.width = W * dpr; cv.height = H * dpr;
+      cv.style.cssText = "left:" + -PX + "px;top:" + -PT + "px;width:" + W + "px;height:" + H + "px";
+      wrap.appendChild(cv);
+      var ctx = cv.getContext("2d");
+      var parts = null, t = 0, target = 0, last = 0, raf = 0, color = "#000";
+      rasterize(svg, function (p) { parts = p; if (target) go(target); });
+
+      function draw() {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = color;
+        for (var i = 0; i < parts.length; i++) {
+          var q = parts[i], u = clamp((t - q.d) / 0.5, 0, 1);
+          if (u >= 1) continue;
+          var e = Math.pow(u, 1.35);
+          var x = q.x + q.vx * e + Math.sin(q.ph + u * q.fq * Math.PI) * q.sw * u;
+          var y = q.y + q.vy * e;
+          var s = u > 0.55 ? 1 : CELL;
+          ctx.globalAlpha = q.a * Math.pow(1 - u, 1.3);
+          ctx.fillRect(Math.round(PX + x), Math.round(PT + y), s, s);
+        }
+        ctx.globalAlpha = 1;
+      }
+      function tick(now) {
+        var dt = Math.min(now - last, 48); last = now;
+        t = target > t ? Math.min(target, t + dt / 1400) : Math.max(target, t - dt / 900);
+        draw();
+        if (t === target) {
+          raf = 0;
+          if (t === 0) wrap.classList.remove("is-dust");
+          return;
+        }
+        raf = requestAnimationFrame(tick);
+      }
+      function go(to) {
+        target = to;
+        if (!parts || raf || t === to) return;
+        color = getComputedStyle(wrap).color;
+        wrap.classList.add("is-dust");
+        last = performance.now();
+        raf = requestAnimationFrame(tick);
+      }
+      card.addEventListener("pointerenter", function (e) { if (e.pointerType !== "touch") go(1); });
+      card.addEventListener("pointerleave", function () { go(0); });
+      card.addEventListener("focus", function () { if (!card.matches || card.matches(":focus-visible")) go(1); });
+      card.addEventListener("blur", function () { go(0); });
     });
   })();
 

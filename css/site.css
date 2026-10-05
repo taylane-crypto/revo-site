@@ -112,6 +112,12 @@ body.rv { overflow-x: hidden; overflow-x: clip; font-size: var(--rv-fs-body-lg);
 .svc__cover[data-tone="violet"] .rv-cover__tag { background: var(--violet-700); border-color: color-mix(in srgb, var(--mist-0) 35%, transparent); -webkit-backdrop-filter: none; backdrop-filter: none; }
 .svc__cover .rv-cover[data-tone="violet"] .rv-cover__blob.a { left: auto; right: -16%; top: -24%; width: 52%; height: 48%; }
 .svc__cover .rv-cover[data-tone="violet"] .rv-cover__blob.b { left: -24%; right: -24%; width: auto; bottom: -22%; height: 82%; opacity: 1; }
+/* Ícone pequeno do card. Com motion, o motion.js desenha a dissolução em pixels num canvas por cima (.svc__dust). */
+.svc__icon { position: relative; display: inline-flex; width: 28px; height: 28px; margin-bottom: 4px; color: inherit; }
+.svc__icon .rv-icon { width: 28px; height: 28px; stroke-width: 1.75; transition: opacity 120ms linear; }
+.svc__dust { position: absolute; display: none; pointer-events: none; }
+.svc__icon.is-dust .svc__dust { display: block; }
+.svc__icon.is-dust .rv-icon { opacity: 0; }
 .svc__detail { position: relative; overflow: hidden; flex: 1; }
 .svc__detail::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--rv-gradient-aurora); }
 .svc__detail:focus { outline: none; }
