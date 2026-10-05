@@ -212,6 +212,8 @@ html:not(.ui) .faq .rv-collapse { grid-template-rows: 1fr; }
 .lb__media { display: block; width: auto; height: auto; max-width: min(92vw, 1400px); max-height: calc(100vh - 108px); max-height: calc(100dvh - 108px); border: var(--site-frame) solid var(--rv-surface); border-radius: var(--rv-radius-xl); background: var(--rv-surface); box-shadow: var(--rv-shadow-xl); cursor: default; }
 .lb__media--tall { max-height: none; width: min(92vw, 620px); align-self: start; }
 .lb__close { position: absolute; top: 16px; right: var(--site-gutter); }
+.lb__play { position: absolute; top: 16px; left: var(--site-gutter); }
+.lb__play[hidden] { display: none; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {

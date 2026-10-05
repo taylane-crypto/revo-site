@@ -29,6 +29,33 @@ window.REVO = { restoringFocus: false };
     var body = $("[data-lb-body]", dlg);
     var opener = null;
     var closing = false;
+    // Botão próprio de pausar/tocar (sem volume), criado aqui para não depender do HTML.
+    var playBtn = document.createElement("button");
+    playBtn.type = "button";
+    playBtn.className = "rv-btn rv-btn--secondary lb__play";
+    playBtn.setAttribute("data-lb-play", "");
+    playBtn.hidden = true;
+    var playLabel = document.createElement("span");
+    playBtn.appendChild(playLabel);
+    dlg.appendChild(playBtn); // depois do Fechar: o foco inicial do diálogo continua no Fechar
+
+    // Nenhum vídeo da página usa controles nativos nem som.
+    $$("video").forEach(function (v) {
+      v.controls = false; v.removeAttribute("controls");
+      v.muted = true; v.defaultMuted = true;
+      v.disablePictureInPicture = true; v.disableRemotePlayback = true;
+    });
+    var current = null;
+
+    function syncPlay() {
+      if (!playBtn || !current || current.tagName !== "VIDEO") return;
+      var paused = current.paused;
+      playBtn.setAttribute("aria-label", paused ? "Tocar vídeo" : "Pausar vídeo");
+      playBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+      if (playLabel) playLabel.textContent = paused ? "Tocar" : "Pausar";
+    }
+
+    function play(v) { var pr = v.play(); if (pr && pr.catch) pr.catch(syncPlay); }
 
     function build(t) {
       var d = t.dataset, w = +d.w || 4, h = +d.h || 5, el, wrap;
@@ -37,9 +64,18 @@ window.REVO = { restoringFocus: false };
         el = document.createElement("video");
         el.src = d.full;
         if (d.poster) el.poster = d.poster;
-        el.controls = true; el.loop = true; el.muted = true; el.playsInline = true;
+        // Sem controles nativos: o player do celular expõe volume e tela cheia. Os vídeos não têm som.
+        el.controls = false; el.loop = true;
+        el.muted = true; el.defaultMuted = true; el.setAttribute("muted", "");
+        el.playsInline = true; el.setAttribute("playsinline", ""); el.setAttribute("webkit-playsinline", "");
+        el.disablePictureInPicture = true; el.setAttribute("disablepictureinpicture", "");
+        el.disableRemotePlayback = true; el.setAttribute("disableremoteplayback", "");
+        el.setAttribute("x-webkit-airplay", "deny");
+        el.setAttribute("controlslist", "nodownload nofullscreen noremoteplayback");
         el.setAttribute("aria-label", "Vídeo");
-        if (!reduceMotion()) el.autoplay = true;
+        el.addEventListener("play", syncPlay);
+        el.addEventListener("pause", syncPlay);
+        el.addEventListener("volumechange", function () { if (!el.muted) el.muted = true; });
         wrap = el;
       } else {
         var thumb = $("img", t);
@@ -59,6 +95,12 @@ window.REVO = { restoringFocus: false };
       el.className = "lb__media" + (tall ? " lb__media--tall" : "");
       body.textContent = "";
       body.appendChild(wrap);
+      current = el;
+      if (playBtn) playBtn.hidden = d.kind !== "video";
+      if (d.kind === "video") {
+        syncPlay();
+        if (!reduceMotion()) play(el); // movimento normal: abre tocando; reduzido: abre pausado
+      }
       return el;
     }
 
@@ -86,7 +128,10 @@ window.REVO = { restoringFocus: false };
       setTimeout(function () {
         dlg.close();
         dlg.classList.remove("is-closing");
+        if (current && current.tagName === "VIDEO") current.pause();
+        current = null;
         body.textContent = "";
+        if (playBtn) playBtn.hidden = true;
         closing = false;
         var o = opener; opener = null;
         if (o && o.tabIndex >= 0 && document.contains(o)) {
@@ -100,6 +145,10 @@ window.REVO = { restoringFocus: false };
     document.addEventListener("click", function (e) {
       var t = e.target.closest("[data-open]");
       if (t) { e.preventDefault(); open(t); }
+    });
+    if (playBtn) playBtn.addEventListener("click", function () {
+      if (!current || current.tagName !== "VIDEO") return;
+      if (current.paused) play(current); else current.pause();
     });
     dlg.addEventListener("cancel", function (e) { e.preventDefault(); close(); }); // Esc
     dlg.addEventListener("click", function (e) {

@@ -220,7 +220,7 @@ html.motion-ok [data-reveal] { opacity: 0; transform: translate3d(0, 18px, 0); t
 html.motion-ok [data-reveal].is-in { opacity: 1; transform: none; }
 
 /* ---------- Visualizador ---------- */
-html.motion-ok .lb[open]::backdrop, html.motion-ok .lb[open] .lb__close { animation: site-in 240ms var(--rv-ease-out) both; }
+html.motion-ok .lb[open]::backdrop, html.motion-ok .lb[open] .lb__close, html.motion-ok .lb[open] .lb__play { animation: site-in 240ms var(--rv-ease-out) both; }
 html.motion-ok .lb.is-closing { opacity: 0; transition: opacity 160ms var(--rv-ease-out); }
 
 /* Cinto e suspensório: se a preferência mudar com a página aberta, nada anima. */
