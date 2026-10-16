@@ -194,6 +194,8 @@ html:not(.ui) .faq .rv-collapse { grid-template-rows: 1fr; }
 .contact__form .rv-input input, .contact__form .rv-input textarea { font-size: var(--rv-fs-body-lg); }
 .contact__form .rv-input--textarea textarea { min-height: 112px; }
 .contact__form .rv-field__hint { font-size: var(--rv-fs-small); }
+.contact__form .contact__row { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 20px; }
+@media (max-width: 599px) { .contact__form .contact__row { grid-template-columns: minmax(0, 1fr); } }
 .form__done h3 { font-size: clamp(26px, 2.6vw, 36px); font-weight: var(--rv-fw-light); letter-spacing: var(--rv-tracking-display); line-height: 1.1; }
 .form__done p { color: var(--rv-text-secondary); }
 .form__done:focus { outline: none; }

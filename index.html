@@ -482,18 +482,32 @@
 <section id="contato" class="contact" aria-label="Contato">
   <div class="site-container">
     <div class="contact__panel">
-      <!-- PREMISSA: formulário curto de três campos por diretriz desta versão; o posicionamento (seção 6.4) recomenda um formulário qualificado. Destino do lead (SITE_CONFIG.leadEndpoint) ainda não definido. -->
+      <!-- PREMISSA: formulário com cinco campos obrigatórios (nome, sobrenome, e-mail, WhatsApp, mensagem). Destino do lead (SITE_CONFIG.leadEndpoint) ainda não definido. -->
       <form class="rv-contact contact__form" id="contato-form" data-contact novalidate data-reveal>
         <p class="rv-sr" role="alert" data-form-alert></p>
-        <div class="rv-field">
-          <label class="rv-field__label" for="f-nome"><span>Nome</span></label>
-          <div class="rv-input lg"><input id="f-nome" name="nome" type="text" placeholder="Seu nome e sobrenome" autocomplete="name" required aria-describedby="f-nome-err"></div>
-          <p class="rv-field__hint" id="f-nome-err" data-err hidden>Escreva seu nome.</p>
+        <div class="rv-contact__grid contact__row">
+          <div class="rv-field">
+            <label class="rv-field__label" for="f-nome"><span>Nome</span></label>
+            <div class="rv-input lg"><input id="f-nome" name="nome" type="text" placeholder="Seu nome" autocomplete="given-name" required aria-describedby="f-nome-err"></div>
+            <p class="rv-field__hint" id="f-nome-err" data-err hidden>Escreva seu nome.</p>
+          </div>
+          <div class="rv-field">
+            <label class="rv-field__label" for="f-sobrenome"><span>Sobrenome</span></label>
+            <div class="rv-input lg"><input id="f-sobrenome" name="sobrenome" type="text" placeholder="Seu sobrenome" autocomplete="family-name" required aria-describedby="f-sobrenome-err"></div>
+            <p class="rv-field__hint" id="f-sobrenome-err" data-err hidden>Escreva seu sobrenome.</p>
+          </div>
         </div>
-        <div class="rv-field">
-          <label class="rv-field__label" for="f-email"><span>E-mail corporativo</span></label>
-          <div class="rv-input lg"><input id="f-email" name="email" type="email" placeholder="voce@empresa.com.br" autocomplete="email" required aria-describedby="f-email-err"></div>
-          <p class="rv-field__hint" id="f-email-err" data-err hidden>Confira o e-mail. Parece faltar alguma coisa.</p>
+        <div class="rv-contact__grid contact__row">
+          <div class="rv-field">
+            <label class="rv-field__label" for="f-email"><span>E-mail corporativo</span></label>
+            <div class="rv-input lg"><input id="f-email" name="email" type="email" placeholder="voce@empresa.com.br" autocomplete="email" required aria-describedby="f-email-err"></div>
+            <p class="rv-field__hint" id="f-email-err" data-err hidden>Confira o e-mail. Parece faltar alguma coisa.</p>
+          </div>
+          <div class="rv-field">
+            <label class="rv-field__label" for="f-whatsapp"><span>WhatsApp</span></label>
+            <div class="rv-input lg"><input id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" placeholder="(11) 91234-5678" autocomplete="tel" maxlength="20" required aria-describedby="f-whatsapp-err"></div>
+            <p class="rv-field__hint" id="f-whatsapp-err" data-err hidden>Confira o WhatsApp com DDD.</p>
+          </div>
         </div>
         <div class="rv-field">
           <label class="rv-field__label" for="f-msg"><span>Mensagem</span></label>

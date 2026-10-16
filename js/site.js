@@ -197,22 +197,73 @@ window.REVO = { restoringFocus: false };
 
   /* ---------- Formulário de contato ---------- */
   (function contact() {
-    var form = $("[data-contact]");
+    var form = document.querySelector("[data-contact]");
     if (!form) return;
-    var alertBox = $("[data-form-alert]", form);
+    var alertBox = form.querySelector("[data-form-alert]");
+    var el = form.elements;
+    var MSG_EMAIL_CORP = "Use seu e-mail corporativo.";
+    var FREE_MAIL = ["gmail.com", "googlemail.com", "hotmail.com", "hotmail.com.br", "outlook.com", "outlook.com.br", "live.com", "msn.com", "yahoo.com", "yahoo.com.br", "ymail.com", "rocketmail.com", "icloud.com", "me.com", "mac.com", "aol.com", "bol.com.br", "uol.com.br", "terra.com.br", "ig.com.br", "globo.com", "globomail.com", "r7.com", "zipmail.com.br", "protonmail.com", "proton.me", "gmx.com", "mail.com", "yandex.com", "zoho.com", "tutanota.com"];
+
+    // Só dígitos do telefone, sem o +55 quando ele vier colado
+    function phoneDigits(v) {
+      var d = String(v || "").replace(/\D/g, "");
+      if (d.length > 11 && d.indexOf("55") === 0) d = d.slice(2);
+      return d.slice(0, 11);
+    }
+    function phoneMask(d) {
+      if (!d) return "";
+      if (d.length <= 2) return "(" + d;
+      var ddd = "(" + d.slice(0, 2) + ") ", r = d.slice(2);
+      if (r.length <= 4) return ddd + r;
+      var cut = d.length === 11 ? 5 : 4;
+      return ddd + r.slice(0, cut) + "-" + r.slice(cut);
+    }
+    function isFreeMail(v) {
+      var dom = v.trim().toLowerCase().split("@").pop();
+      return FREE_MAIL.some(function (f) { return dom === f || dom.slice(-(f.length + 1)) === "." + f; });
+    }
+
+    // Cada validador devolve true (ok), false (erro padrão do campo) ou o texto de um erro específico
     var fields = [
-      [form.elements.nome, function (v) { return v.trim().length >= 2; }],
-      [form.elements.email, function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }],
-      [form.elements.mensagem, function (v) { return v.trim().length >= 3; }]
+      [el.nome, function (v) { return v.trim().length >= 2; }],
+      [el.sobrenome, function (v) { return v.trim().length >= 2; }],
+      [el.email, function (v) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())) return false;
+        return isFreeMail(v) ? MSG_EMAIL_CORP : true;
+      }],
+      [el.whatsapp, function (v) {
+        var d = phoneDigits(v);
+        return (d.length === 10 || d.length === 11) && Number(d.slice(0, 2)) >= 11;
+      }],
+      [el.mensagem, function (v) { return v.trim().length >= 3; }]
     ];
 
-    function setErr(input, bad) {
+    function setErr(input, bad, msg) {
       var field = input.closest(".rv-field");
-      var err = $("[data-err]", field);
+      var err = field.querySelector("[data-err]");
       field.classList.toggle("is-error", bad);
       if (bad) input.setAttribute("aria-invalid", "true"); else input.removeAttribute("aria-invalid");
-      if (err) err.hidden = !bad;
+      if (!err) return;
+      if (err.getAttribute("data-default") === null) err.setAttribute("data-default", err.textContent);
+      err.textContent = (bad && msg) || err.getAttribute("data-default");
+      err.hidden = !bad;
     }
+
+    // Máscara do WhatsApp enquanto digita, mantendo o cursor no mesmo dígito
+    el.whatsapp.addEventListener("input", function (e) {
+      var t = e.target, v = t.value;
+      if (e.inputType && e.inputType.indexOf("delete") === 0 && phoneDigits(v) === phoneDigits(t.getAttribute("data-prev"))) { t.setAttribute("data-prev", v); return; }
+      var pos = t.selectionStart == null ? v.length : t.selectionStart;
+      var before = v.slice(0, pos).replace(/\D/g, "").length;
+      var raw = v.replace(/\D/g, "");
+      if (raw.length > 11 && raw.indexOf("55") === 0) before = Math.max(0, before - 2);
+      var out = phoneMask(phoneDigits(v));
+      t.value = out;
+      t.setAttribute("data-prev", out);
+      var i = 0, n = 0;
+      while (i < out.length && n < before) { if (/\d/.test(out[i])) n++; i++; }
+      if (document.activeElement === t) t.setSelectionRange(i, i);
+    });
 
     form.addEventListener("input", function (e) {
       if (e.target.getAttribute("aria-invalid") === "true") setErr(e.target, false);
@@ -222,8 +273,9 @@ window.REVO = { restoringFocus: false };
       e.preventDefault();
       var first = null;
       fields.forEach(function (f) {
-        var bad = !f[1](f[0].value || "");
-        setErr(f[0], bad);
+        var res = f[1](f[0].value || "");
+        var bad = res !== true;
+        setErr(f[0], bad, typeof res === "string" ? res : "");
         if (bad && !first) first = f[0];
       });
       if (first) {
@@ -238,16 +290,18 @@ window.REVO = { restoringFocus: false };
 
     function payload() {
       return {
-        nome: form.elements.nome.value.trim(),
-        email: form.elements.email.value.trim(),
-        mensagem: form.elements.mensagem.value.trim(),
+        nome: el.nome.value.trim(),
+        sobrenome: el.sobrenome.value.trim(),
+        email: el.email.value.trim(),
+        whatsapp: "+55" + phoneDigits(el.whatsapp.value),
+        mensagem: el.mensagem.value.trim(),
         origem: location.href
       };
     }
 
     function send() {
-      var b = $('button[type="submit"]', form);
-      var label = $("span", b);
+      var b = form.querySelector('button[type="submit"]');
+      var label = b.querySelector("span");
       b.style.minWidth = b.offsetWidth + "px";
       b.disabled = true; b.setAttribute("aria-busy", "true");
       label.textContent = "Enviando...";
@@ -262,7 +316,7 @@ window.REVO = { restoringFocus: false };
         done.focus();
       };
       var fail = function () { reset(); alertBox.textContent = "Algo deu errado. Tente de novo em alguns instantes."; alertBox.classList.remove("rv-sr"); alertBox.classList.add("rv-field__hint"); };
-      var url = window.SITE_CONFIG.leadEndpoint;
+      var url = (window.SITE_CONFIG || {}).leadEndpoint;
       if (!url) { setTimeout(ok, 600); return; } // PREMISSA: sem destino definido, o envio é tratado localmente
       fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload()) })
         .then(function (r) { if (!r.ok) throw new Error(r.status); ok(); })
