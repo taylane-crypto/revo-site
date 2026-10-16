@@ -104,6 +104,9 @@ body.rv::before { content: ""; position: fixed; left: 0; right: 0; top: 0; heigh
    camada própria: no iPhone a camada do texto recalculava o blur e o blend do cover só na caixa do
    texto e aparecia um retângulo mais claro. */
 .decl__panel > .rv-cover { z-index: -1; }
+/* Textura de ruído do cover desligada só aqui: o ::after usa mix-blend-mode: overlay e, no iPhone,
+   o blend recomposto na caixa do texto deixava um retângulo mais claro sobre o rosa. */
+.decl__panel .rv-cover::after { display: none; }
 .decl__text { max-width: 17.5em; font-size: clamp(30px, 5vw, 76px); font-weight: var(--rv-fw-light); line-height: 1.04; letter-spacing: -0.045em; color: var(--pine-950); text-wrap: balance; }
 
 /* ---------- 03 · Serviços: card visual vira card detalhado no mesmo lugar ---------- */

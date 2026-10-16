@@ -144,7 +144,15 @@ html.motion-ok .hall.is-built .hall__copy > *:nth-child(4) { animation-delay: 21
 
 /* ---------- Declaração: revelação por palavra, ligada ao scroll ---------- */
 html.motion-ok .decl__text.is-split { --dp: 0; }
-html.motion-ok .decl__text.is-split .w { display: inline-block; opacity: clamp(.16, calc(var(--dp) * (var(--n) + 3) - var(--i)), 1); }
+/* Só cor, sem opacity nem inline-block: a palavra não ganha camada própria (no iPhone a camada
+   recompunha o fundo na caixa do texto). Mesmo ritmo de antes: --a vai de .16 a 1. */
+html.motion-ok .decl__text.is-split .w {
+  --a: clamp(.16, calc(var(--dp) * (var(--n) + 3) - var(--i)), 1);
+  color: rgba(7, 30, 24, var(--a)); /* --pine-950 (#071e18) em rgba: base para quem não tem color-mix com calc */
+}
+@supports (color: color-mix(in srgb, red calc(.5 * 100%), transparent)) {
+  html.motion-ok .decl__text.is-split .w { color: color-mix(in srgb, var(--pine-950) calc(var(--a) * 100%), transparent); }
+}
 
 /* ---------- Parede Suhai: colunas em rolagem contínua, sentidos opostos ---------- */
 html.motion-ok .wall.is-live { height: clamp(520px, 80vh, 780px); padding: 0; }
