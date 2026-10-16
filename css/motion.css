@@ -216,6 +216,37 @@ html.motion-ok .svc.is-open .svc__detail { transform: none; transition-delay: 60
 html.motion-ok .svc.is-open .svc__h { transform: scale(.985); }
 html.motion-ok .svc:not(.is-open) .svc__h { transition-delay: 0s, 0s, 0s; }
 
+/* Entrada dos cards: sobem 20 px com fade, uma vez, em sequência (o motion.js põe .is-in e o atraso --svc-d).
+   Fica no li: o hover mexe no botão e a abertura mexe no .svc__h e no .svc__detail, sem disputa de transform. */
+html.motion-ok .serv__grid > .svc { transition: opacity 560ms var(--rv-ease-out), transform 560ms var(--rv-ease-out); transition-delay: var(--svc-d, 0ms); }
+html.motion-ok .serv__grid > .svc:not(.is-in) { opacity: 0; transform: translate3d(0, 20px, 0); }
+
+/* Seta: empurrão diagonal curto (cerca de 540 ms) a cada 3,4 s, com atraso próprio por card.
+   O laço fica no svg; o avanço do hover fica no span em volta, então um não apaga o outro. */
+@keyframes svc-nudge {
+  0%, 84% { transform: none; }
+  92% { transform: translate3d(2px, -2px, 0); }
+  100% { transform: none; }
+}
+html.motion-ok .svc__arrow { transition: transform 220ms var(--rv-ease-out); }
+html.motion-ok .svc__arrow .rv-icon { animation: svc-nudge 3.4s var(--rv-ease-out) infinite both; animation-delay: var(--svc-a, 0s); }
+html.motion-ok .svc:nth-child(1) { --svc-a: .4s; }
+html.motion-ok .svc:nth-child(2) { --svc-a: 1.9s; }
+html.motion-ok .svc:nth-child(3) { --svc-a: 1.1s; }
+html.motion-ok .svc:nth-child(4) { --svc-a: 2.7s; }
+html.motion-ok .svc:nth-child(5) { --svc-a: .8s; }
+html.motion-ok .svc:nth-child(6) { --svc-a: 2.3s; }
+/* Pausa fora da tela e com o card aberto (a seta some junto com a capa). */
+html.motion-ok .serv__grid.is-live:not(.is-inview) .svc__arrow .rv-icon,
+html.motion-ok .svc.is-open .svc__arrow .rv-icon { animation-play-state: paused; }
+/* Hover (só ponteiro fino) e foco por teclado: a seta avança e fica, sem o laço. */
+html.motion-ok .svc__cover:focus-visible .svc__arrow { transform: translate3d(3px, -3px, 0); }
+html.motion-ok .svc__cover:focus-visible .svc__arrow .rv-icon { animation: none; }
+@media (hover: hover) and (pointer: fine) {
+  html.motion-ok .svc__cover:hover .svc__arrow { transform: translate3d(3px, -3px, 0); }
+  html.motion-ok .svc__cover:hover .svc__arrow .rv-icon { animation: none; }
+}
+
 /* ---------- Processo: as etapas acendem em sequência quando entram na tela ---------- */
 html.motion-ok .proc .rv-process.is-live .rv-process__dot { transition: background-color var(--rv-dur-3) var(--rv-ease-out), border-color var(--rv-dur-3) var(--rv-ease-out), color var(--rv-dur-3) var(--rv-ease-out), box-shadow var(--rv-dur-3) var(--rv-ease-out); }
 html.motion-ok .proc .rv-process.is-live .rv-process__step::before { transform: scale(0); transform-origin: 0 0; transition: transform 520ms var(--rv-ease-out); }

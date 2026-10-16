@@ -371,5 +371,28 @@
     reveals.forEach(function (el) { el.classList.add("is-in"); });
   }
 
+  /* Cards de serviço: entram uma vez, em sequência. Os que aparecem no mesmo lote do observador
+     ganham 70 ms de atraso cada (na grade de 3 colunas, a fileira sobe da esquerda para a direita).
+     A grade inteira fica "viva": fora da tela, o laço da seta pausa (motion.css). */
+  var grid = $("#servicos .serv__grid");
+  if (grid) {
+    var cards = $$(".svc", grid);
+    if (hasIO) {
+      var cio = new IntersectionObserver(function (es) {
+        var k = 0;
+        es.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          en.target.style.setProperty("--svc-d", (k++ * 70) + "ms");
+          en.target.classList.add("is-in");
+          cio.unobserve(en.target);
+        });
+      }, { threshold: 0.15 });
+      cards.forEach(function (c) { cio.observe(c); });
+    } else {
+      cards.forEach(function (c) { c.classList.add("is-in"); });
+    }
+    live(grid, "0px");
+  }
+
   window.__motionReady = true;
 })();

@@ -146,6 +146,12 @@ body.rv::before { content: ""; position: fixed; left: 0; right: 0; top: 0; heigh
 .svc__cover[data-tone="violet"] .rv-cover__tag { background: var(--violet-700); border-color: color-mix(in srgb, var(--mist-0) 35%, transparent); -webkit-backdrop-filter: none; backdrop-filter: none; }
 .svc__cover .rv-cover[data-tone="violet"] .rv-cover__blob.a { left: auto; right: -16%; top: -24%; width: 52%; height: 48%; }
 .svc__cover .rv-cover[data-tone="violet"] .rv-cover__blob.b { left: -24%; right: -24%; width: auto; bottom: -22%; height: 82%; opacity: 1; }
+/* Seta de pista ao lado do título: a última palavra e a seta não se separam na quebra de linha.
+   Herda a cor do texto do card (currentColor). A caixa tem 0,8em (o traço desenhado ocupa cerca de 0,33em)
+   e desce 0,16em: o desenho fica centrado na altura de x, que é o centro óptico das palavras finais. */
+.svc__tail { white-space: nowrap; }
+.svc__arrow { display: inline-block; margin-left: .12em; vertical-align: -.16em; }
+.svc__arrow .rv-icon { display: block; width: .8em; height: .8em; stroke-width: var(--rv-icon-stroke); }
 .svc__detail { position: relative; overflow: hidden; flex: 1; }
 .svc__detail::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: var(--rv-gradient-aurora); }
 .svc__detail:focus { outline: none; }
