@@ -212,7 +212,11 @@
   /* ====================================================================== */
   /* 2 · Declaração                                                         */
   /* ====================================================================== */
-  var decl = $("[data-decl-text]");
+  /* Mobile (até 820 px ou sem hover): o card fica estático, sem dividir em palavras e sem scroll.
+     No iPhone a divisão em spans recompunha o fundo na caixa do texto (retângulo claro).
+     Decidido no carregamento; girar o celular não recria. */
+  var declStatic = !!window.matchMedia && window.matchMedia("(max-width: 820px), (hover: none)").matches;
+  var decl = declStatic ? null : $("[data-decl-text]");
   if (decl) {
     var text = decl.textContent.trim();
     var words = text.split(/\s+/);
