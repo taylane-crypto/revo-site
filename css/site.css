@@ -24,6 +24,11 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body.rv { overflow-x: hidden; overflow-x: clip; font-size: var(--rv-fs-body-lg); }
+/* Fundo da página: o Revo UI usa background-attachment: fixed no body. O Safari do iPhone ignora o
+   fixed e repete a lavagem num ladrilho do tamanho da tela, com emenda dura a cada altura de tela.
+   Aqui o body fica só com a cor e a lavagem vai numa camada fixa: mesmo visual no desktop, sem emenda. */
+body.rv { background: var(--rv-bg); }
+body.rv::before { content: ""; position: fixed; left: 0; right: 0; top: 0; height: 100vh; height: 100lvh; z-index: -1; pointer-events: none; background: var(--rv-bg-wash); }
 .rv img, .rv video, .rv svg { display: block; max-width: 100%; }
 .rv h1, .rv h2, .rv h3, .rv p, .rv ul { margin: 0; }
 .rv ul { padding: 0; list-style: none; }
@@ -95,8 +100,11 @@ body.rv { overflow-x: hidden; overflow-x: clip; font-size: var(--rv-fs-body-lg);
 /* ---------- 02 · Declaração (fundo de marca rosa) ---------- */
 .decl { padding: clamp(40px, 6vw, 88px) 0 var(--site-section-y); }
 .decl__panel { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--rv-radius-2xl); padding: clamp(44px, 9vw, 136px) clamp(22px, 6vw, 96px); box-shadow: var(--rv-shadow-md); }
-.decl__panel > .rv-cover { z-index: 0; }
-.decl__text { position: relative; z-index: 1; max-width: 17.5em; font-size: clamp(30px, 5vw, 76px); font-weight: var(--rv-fw-light); line-height: 1.04; letter-spacing: -0.045em; color: var(--pine-950); text-wrap: balance; }
+/* O cover fica em z-index -1 dentro do painel (que já isola) e o texto volta ao fluxo normal, sem
+   camada própria: no iPhone a camada do texto recalculava o blur e o blend do cover só na caixa do
+   texto e aparecia um retângulo mais claro. */
+.decl__panel > .rv-cover { z-index: -1; }
+.decl__text { max-width: 17.5em; font-size: clamp(30px, 5vw, 76px); font-weight: var(--rv-fw-light); line-height: 1.04; letter-spacing: -0.045em; color: var(--pine-950); text-wrap: balance; }
 
 /* ---------- 03 · Serviços: card visual vira card detalhado no mesmo lugar ---------- */
 .serv { padding: 0 0 var(--site-section-y); scroll-margin-top: 96px; }
