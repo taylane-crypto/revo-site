@@ -1,4 +1,5 @@
 # Revo Studio: liberado para buscadores e robôs de IA.
+# Esta cópia é espelho com noindex. O site oficial é https://revo.segbox.com
 # sitemap.xml entra quando o domínio for definido (PREMISSA).
 User-agent: *
 Allow: /
